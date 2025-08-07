@@ -1,0 +1,28 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 341c7907-00f4-49dc-a60e-b185790809d6 # Category
+handle: categories
+maxAuthors: 1
+name: Categories
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  c7e96329-677b-46f3-b962-ea2f6434fb74: # Paradise & Purpose: Sumner Stories
+    enabledByDefault: true
+    hasUrls: true
+    template: categories/_entry.twig
+    uriFormat: '{slug}'
+type: channel

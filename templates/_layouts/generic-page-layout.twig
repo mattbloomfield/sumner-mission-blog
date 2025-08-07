@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ entry.title ?? siteName }}{% endblock %}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f7f3e9 0%, #fdf6e3 50%, #f4f1e8 100%);
+            color: #5a4a3a;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .page-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .site-header {
+            background: linear-gradient(135deg, #d4a574 0%, #c89666 50%, #b8845a 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .site-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .site-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            text-align: center;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        .main-nav {
+            background: rgba(255,255,255,0.95);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #5a4a3a;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: #d4a574;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            color: #4a3428;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        .site-footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #8a7a6a;
+            border-top: 1px solid #e0d5c5;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-wrapper {
+                padding: 0 15px;
+            }
+
+            .site-title {
+                font-size: 2rem;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .main-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <header class="site-header">
+        <h1 class="site-title">{% block siteTitle %}{{ siteName }}{% endblock %}</h1>
+        <p class="site-subtitle">{% block siteSubtitle %}Serving with love in the Caribbean{% endblock %}</p>
+    </header>
+
+    <nav class="main-nav">
+        <ul class="nav-list">
+            <li><a href="/" class="nav-link {{ craft.app.request.getPathInfo() == '' ? 'active' : '' }}">Home</a></li>
+            <li><a href="/about" class="nav-link {{ craft.app.request.getPathInfo() starts with 'about' ? 'active' : '' }}">About Us</a></li>
+            <li><a href="/contact" class="nav-link {{ craft.app.request.getPathInfo() starts with 'contact' ? 'active' : '' }}">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; {{ "now"|date('Y') }} {{ siteName }}. Sharing our mission journey with faith and joy.</p>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!-- Welcome Message -->
+<section class="welcome-section">
+    {% if title is defined %}
+        <h2>{{ title }}</h2>
+    {% else %}
+        <h2>Welcome to Our Mission Journey</h2>
+    {% endif %}
+
+    {% if text is defined %}
+        <div class="welcome-text">
+            {{ text }}
+        </div>
+    {% endif %}
+</section>

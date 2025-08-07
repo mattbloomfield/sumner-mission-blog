@@ -1,0 +1,29 @@
+columnSuffix: null
+handle: textCardMatrix
+instructions: null
+name: 'Text Card Matrix'
+searchable: false
+settings:
+  createButtonLabel: null
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - 6d17bbfd-6772-48ac-8ac2-8bfda31f7a71 # Text Card
+        -
+          - group
+          - General
+  includeTableView: false
+  maxEntries: 3
+  minEntries: 3
+  pageSize: 50
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: cards
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

@@ -1,0 +1,271 @@
+{#
+Image Gallery Component
+Usage: {% include 'components/image-gallery.twig' with {
+    images: entry.galleryImages.all(),
+    caption: 'Gallery caption',
+    columns: 3,
+    lightbox: true
+} %}
+#}
+
+{% set galleryColumns = columns ?? 3 %}
+{% set enableLightbox = lightbox ?? true %}
+{% set galleryId = 'gallery-' ~ random() %}
+{% set showCaption = caption is defined and caption is not empty %}
+
+<div class="image-gallery-component" data-columns="{{ galleryColumns }}">
+    {% if showCaption %}
+        <div class="gallery-header">
+            <h3 class="gallery-caption">{{ caption }}</h3>
+        </div>
+    {% endif %}
+
+    {% if images %}
+        <div class="gallery-grid" id="{{ galleryId }}">
+            {% for image in images %}
+                <div class="gallery-item">
+                    {% if enableLightbox %}
+                    <a href="{{ image.getUrl('large') }}"
+                       class="gallery-link"
+                       data-lightbox="{{ galleryId }}"
+                       data-title="{{ image.title ?? '' }}">
+                        {% endif %}
+
+                        <div class="gallery-image-wrapper">
+                            <img
+                                    src="{{ image.getUrl('medium') }}"
+                                    alt="{{ image.title ?? 'Gallery image ' ~ loop.index }}"
+                                    loading="lazy"
+                            />
+                            <div class="gallery-overlay">
+                                <span class="gallery-zoom-icon">🔍</span>
+                            </div>
+                        </div>
+
+                        {% if enableLightbox %}
+                    </a>
+                    {% endif %}
+
+                    {% if image.title %}
+                        <div class="gallery-item-caption">
+                            {{ image.title }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="gallery-empty">
+            <p>No images available for this gallery.</p>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+    .image-gallery-component {
+        margin: 2rem 0;
+    }
+
+    .gallery-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .gallery-caption {
+        color: #4a3428;
+        font-size: 1.5rem;
+        margin: 0;
+        position: relative;
+        display: inline-block;
+    }
+
+    .gallery-caption:after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: #d4a574;
+        border-radius: 2px;
+    }
+
+    .gallery-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .gallery-grid[data-columns="2"] {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .gallery-grid[data-columns="4"] {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .gallery-grid[data-columns="5"] {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .gallery-item {
+        position: relative;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .gallery-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+
+    .gallery-image-wrapper {
+        position: relative;
+        aspect-ratio: 4/3;
+        overflow: hidden;
+    }
+
+    .gallery-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-image-wrapper img {
+        transform: scale(1.05);
+    }
+
+    .gallery-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(212, 165, 116, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+    }
+
+    .gallery-zoom-icon {
+        font-size: 2rem;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .gallery-item-caption {
+        padding: 1rem;
+        background: linear-gradient(135deg, #f7f3e9 0%, #fdf6e3 100%);
+        color: #5a4a3a;
+        font-size: 0.9rem;
+        text-align: center;
+        border-top: 2px solid #d4a574;
+    }
+
+    .gallery-empty {
+        text-align: center;
+        padding: 3rem;
+        color: #8a7a6a;
+        background: #fafafa;
+        border-radius: 8px;
+        border: 2px dashed #e0d5c5;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .gallery-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .gallery-grid[data-columns="2"] {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .gallery-grid[data-columns="3"] {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .gallery-grid[data-columns="4"],
+        .gallery-grid[data-columns="5"] {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .gallery-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .gallery-grid[data-columns="2"] {
+            grid-template-columns: 1fr;
+        }
+
+        .gallery-item-caption {
+            padding: 0.75rem;
+            font-size: 0.85rem;
+        }
+    }
+
+    /* Lightbox enhancement styles */
+    .gallery-link:focus {
+        outline: 3px solid #d4a574;
+        outline-offset: 2px;
+    }
+
+    /* Animation for loading images */
+    .gallery-image-wrapper img[loading="lazy"] {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .gallery-image-wrapper img[loading="lazy"].loaded {
+        opacity: 1;
+    }
+</style>
+
+<script>
+    // Simple lightbox functionality (optional enhancement)
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add loaded class when images load
+        const lazyImages = document.querySelectorAll('.gallery-image-wrapper img[loading="lazy"]');
+        lazyImages.forEach(img => {
+            if (img.complete) {
+                img.classList.add('loaded');
+            } else {
+                img.addEventListener('load', function() {
+                    this.classList.add('loaded');
+                });
+            }
+        });
+
+        // Basic keyboard navigation for gallery items
+        const galleryLinks = document.querySelectorAll('.gallery-link');
+        galleryLinks.forEach(link => {
+            link.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+    });
+</script>

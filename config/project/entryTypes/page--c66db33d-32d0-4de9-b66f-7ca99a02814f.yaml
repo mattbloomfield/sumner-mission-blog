@@ -1,0 +1,70 @@
+color: lime
+description: null
+fieldLayouts:
+  85021843-ec63-4b68-a381-f210a430950b:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-08-07T18:34:03+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 71655510-9fee-4139-9f93-008b24ffe981
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-08-07T18:47:31+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: a6d8b248-c057-4a18-a1a1-8699ec65b85d # Article Body
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 32f0a0b9-05a7-4309-b48d-c36f9bfafa29
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 25d00f7b-9aa4-433a-be8f-b8847376de25
+        userCondition: null
+handle: page
+hasTitleField: true
+icon: page
+name: Page
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

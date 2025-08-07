@@ -1,0 +1,87 @@
+color: emerald
+description: null
+fieldLayouts:
+  531f6992-72e4-4006-93f1-45d506bfe0ed:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-08-07T17:30:10+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 3304f795-1f0a-4d1f-8bef-f17a0eddf170
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-08-07T17:50:50+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: e5beaaff-42ae-49b4-ac91-74e3a12599ef # Hero
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b8d41991-4d2f-41d4-b2bf-691d3adc0a0d
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-08-07T18:08:22+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 2203e170-2325-472d-b713-296a3eeed211 # Landing Page Builder
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: bcb89464-3f4c-4ce7-ba8f-25a4f774b920
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: e11dafbd-62c4-47b5-b86b-64cf05c4193f
+        userCondition: null
+handle: homePage
+hasTitleField: true
+icon: house
+name: 'Home Page'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

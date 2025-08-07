@@ -1,0 +1,68 @@
+dateModified: 1754597868
+email:
+  fromEmail: heyitsjenni@gmail.com
+  fromName: 'Paradise & Purpose: Sumner Stories'
+  transportType: craft\mail\transportadapters\Sendmail
+fs:
+  imageTransforms:
+    hasUrls: true
+    name: 'Image Transforms'
+    settings:
+      path: '@webroot/images/transforms'
+    type: craft\fs\Local
+    url: $PRIMARY_SITE_URL/images/transforms
+  images:
+    hasUrls: true
+    name: Images
+    settings:
+      path: '@webroot/images'
+    type: craft\fs\Local
+    url: $PRIMARY_SITE_URL/images
+meta:
+  __names__:
+    0cac2d6e-2187-4f65-8a40-67b49fe43ae9: Pages # Pages
+    2cbe9382-1552-424b-a766-56fe1d597499: Home # Home
+    2d4bf084-4122-495b-a4c2-4ed36ec9baa8: 'Paradise & Purpose: Sumner Stories' # Paradise & Purpose: Sumner Stories
+    2f0f1e53-f4c1-4cfd-ba53-119468ce45bd: Categories # Categories
+    3e18e51e-c692-4a4c-86b7-8cb0277cfed7: Text # Text
+    4dff0120-ffae-422b-a9e0-390f0805085d: Images # Images
+    6d17bbfd-6772-48ac-8ac2-8bfda31f7a71: 'Text Card' # Text Card
+    7aebea11-377f-4c2b-9044-efcc61c4abcd: 'Recent Posts' # Recent Posts
+    9deb1b78-d848-4c9a-a26e-ea8416d17c99: 'Pull Quote' # Pull Quote
+    39ecbec2-b128-4c74-8dbc-3fc74dd35bb2: Categories # Categories
+    341c7907-00f4-49dc-a60e-b185790809d6: Category # Category
+    0386d14a-7549-4cf1-964d-a686127a35f3: Image # Image
+    614a0f80-17f1-41dd-bb25-adee56cc18e4: Summary # Summary
+    970a98ef-b8e0-4f47-a481-f9a5445caa7a: 'Image Gallery' # Image Gallery
+    2203e170-2325-472d-b713-296a3eeed211: 'Landing Page Builder' # Landing Page Builder
+    3705ed95-e2d4-4230-b223-acc8ff4e7283: 'Image Gallery Matrix' # Image Gallery Matrix
+    41218836-6831-49f3-9a90-01aff59d5439: Image # Image
+    61560819-0798-4b8e-806f-7afd4fe73baf: 'Text Cards' # Text Cards
+    a6d8b248-c057-4a18-a1a1-8699ec65b85d: 'Article Body' # Article Body
+    a7014023-8f58-49ee-aa06-81f4089e04c9: Post # Post
+    ac73f4a2-97c5-4432-b1aa-ba7ac8c9c572: 'Home Page' # Home Page
+    b4e28d0b-ce5e-4141-931a-ee0bf704617d: 'Title Text' # Title Text
+    b582f59b-66d7-4ba3-8fd7-8c744ded6cde: Simple # Simple
+    c7e96329-677b-46f3-b962-ea2f6434fb74: 'Paradise & Purpose: Sumner Stories' # Paradise & Purpose: Sumner Stories
+    c66db33d-32d0-4de9-b66f-7ca99a02814f: Page # Page
+    cfb9f183-ae0c-4ff6-b31c-d6b7b819ff1f: Blog # Blog
+    e5beaaff-42ae-49b4-ac91-74e3a12599ef: Hero # Hero
+    fb83aab5-1f7a-45ae-92a0-7eccc484a135: 'Text Card Matrix' # Text Card Matrix
+plugins:
+  ckeditor:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.0.0
+system:
+  edition: solo
+  live: true
+  name: 'Paradise & Purpose: Sumner Stories'
+  schemaVersion: 5.8.0.3
+  timeZone: America/Los_Angeles
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: null
+  photoVolumeUid: null
+  require2fa: false
+  requireEmailVerification: true

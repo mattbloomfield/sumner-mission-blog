@@ -1,0 +1,42 @@
+columnSuffix: null
+handle: articleBody
+instructions: null
+name: 'Article Body'
+searchable: false
+settings:
+  availableTransforms: ''
+  availableVolumes: '*'
+  characterLimit: null
+  ckeConfig: b582f59b-66d7-4ba3-8fd7-8c744ded6cde # Simple
+  createButtonLabel: null
+  defaultTransform: null
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - 0386d14a-7549-4cf1-964d-a686127a35f3 # Image
+    -
+      __assoc__:
+        -
+          - uid
+          - 970a98ef-b8e0-4f47-a481-f9a5445caa7a # Image Gallery
+    -
+      __assoc__:
+        -
+          - uid
+          - 9deb1b78-d848-4c9a-a26e-ea8416d17c99 # Pull Quote
+  expandEntryButtons: true
+  fullGraphqlData: true
+  parseEmbeds: false
+  purifierConfig: null
+  purifyHtml: true
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  showWordCount: false
+  sourceEditingGroups:
+    - __ADMINS__
+  wordLimit: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\ckeditor\Field

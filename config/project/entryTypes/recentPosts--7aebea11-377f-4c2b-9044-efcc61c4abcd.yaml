@@ -1,0 +1,53 @@
+color: green
+description: 'Adds a set of recent posts'
+fieldLayouts:
+  2385b18c-267f-43ce-9a3b-dfd4d77a467b:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-08-07T18:05:38+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: a309351c-8a41-40a3-970e-1f8d96aec99c
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 5b9e6d25-015d-4eff-9f78-4f087ebeb955
+        userCondition: null
+handle: recentPosts
+hasTitleField: true
+icon: grid
+name: 'Recent Posts'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

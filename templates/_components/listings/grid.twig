@@ -1,0 +1,15 @@
+{% if items|length %}
+    <section class="recent-posts">
+        <h2>{{ title }}</h2>
+
+        <div class="posts-grid">
+            {% for item in items %}
+                {% include item.type with item.data %}
+            {% endfor %}
+        </div>
+
+        <div class="view-all-posts">
+            <a href="/blog" class="btn-primary">View All Posts</a>
+        </div>
+    </section>
+{% endif %}

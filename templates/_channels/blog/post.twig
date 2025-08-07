@@ -1,0 +1,307 @@
+{% extends "_layouts/generic-page-layout.twig" %}
+
+{% block title %}{{ entry.title ?? "Blog - " ~ siteName }}{% endblock %}
+
+{% block content %}
+    <div class="blog-page">
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1>{{ entry.title ?? "Mission Blog" }}</h1>
+            {% if entry.summary %}
+                <p class="page-description">{{ entry.summary }}</p>
+            {% else %}
+                <p class="page-description">Follow our daily adventures and spiritual journey serving in the Caribbean</p>
+            {% endif %}
+        </header>
+
+        <div class="blog-posts">
+            {% for post in blogPosts %}
+                <article class="blog-post-card">
+                    {% if post.featuredImage.one() %}
+                        <div class="post-featured-image">
+                            <a href="{{ post.url }}">
+                                <img src="{{ post.featuredImage.one().getUrl() }}" alt="{{ post.title }}" />
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    <div class="post-card-content">
+                        <header class="post-header">
+                            <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+                            <div class="post-meta">
+                                <time datetime="{{ post.postDate|date('c') }}">{{ post.postDate|date('F j, Y') }}</time>
+                                {% if post.author %}
+                                    <span class="author">by {{ post.author.fullName ?? post.author.username }}</span>
+                                {% endif %}
+                                {% if post.categories.all()|length %}
+                                    <div class="post-categories">
+                                        {% for category in post.categories.all() %}
+                                            <span class="category-tag">{{ category.title }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </header>
+
+                        <div class="post-excerpt">
+                            {% if post.summary %}
+                                {{ post.summary }}
+                            {% else %}
+                                {{ post.body|striptags|slice(0, 200) }}...
+                            {% endif %}
+                        </div>
+
+                        <div class="post-body">
+
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+
+        <!-- Sidebar or Additional Content -->
+        <aside class="blog-sidebar">
+            <div class="sidebar-section">
+                <h3>About Our Mission</h3>
+                <p>Follow along as we serve the wonderful people of St. Thomas and St. John, sharing faith, love, and the beautiful gospel message in paradise.</p>
+            </div>
+
+            {% if craft.entries.section('blog').all()|length > 0 %}
+                <div class="sidebar-section">
+                    <h3>Recent Posts</h3>
+                    <ul class="recent-posts-sidebar">
+                        {% for post in craft.entries.section('blog').limit(5).all() %}
+                            <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <div class="sidebar-section">
+                <h3>Categories</h3>
+                {% set categories = craft.categories.group('blogCategories').all() %}
+                {% if categories %}
+                    <ul class="category-list">
+                        {% for category in categories %}
+                            <li><a href="/blog/category/{{ category.slug }}">{{ category.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </aside>
+    </div>
+
+    <style>
+        .blog-page {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+        }
+
+        .page-header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #f0e6d6;
+        }
+
+        .page-description {
+            font-size: 1.2rem;
+            color: #8a7a6a;
+            margin-top: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .blog-post-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .blog-post-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .post-featured-image {
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .post-featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-post-card:hover .post-featured-image img {
+            transform: scale(1.05);
+        }
+
+        .post-card-content {
+            padding: 2rem;
+        }
+
+        .post-header h2 {
+            margin-bottom: 1rem;
+        }
+
+        .post-header h2 a {
+            color: #4a3428;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .post-header h2 a:hover {
+            color: #d4a574;
+        }
+
+        .post-meta {
+            color: #8a7a6a;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .post-categories {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .category-tag {
+            background: #f0e6d6;
+            color: #8a7a6a;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .post-excerpt {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            color: #5a4a3a;
+        }
+
+        .read-more-link {
+            color: #d4a574;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .read-more-link:after {
+            content: ' →';
+            transition: transform 0.3s ease;
+        }
+
+        .read-more-link:hover:after {
+            transform: translateX(4px);
+        }
+
+        /* Sidebar */
+        .blog-sidebar {
+            background: #fafafa;
+            padding: 2rem;
+            border-radius: 12px;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-section h3 {
+            color: #d4a574;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .recent-posts-sidebar,
+        .category-list {
+            list-style: none;
+        }
+
+        .recent-posts-sidebar li,
+        .category-list li {
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #f0e6d6;
+        }
+
+        .recent-posts-sidebar li:last-child,
+        .category-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .recent-posts-sidebar a,
+        .category-list a {
+            color: #5a4a3a;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .recent-posts-sidebar a:hover,
+        .category-list a:hover {
+            color: #d4a574;
+        }
+
+        .no-posts {
+            text-align: center;
+            padding: 4rem 2rem;
+            grid-column: 1 / -1;
+        }
+
+        .no-posts h2 {
+            color: #d4a574;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .blog-page {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .blog-sidebar {
+                position: static;
+                margin-top: 2rem;
+            }
+
+            .post-card-content {
+                padding: 1.5rem;
+            }
+
+            .post-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+{% endblock %}

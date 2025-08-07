@@ -1,0 +1,16 @@
+<article class="post-preview">
+    {% if featuredImage.one() %}
+        <div class="post-image">
+            <img src="{{ featuredImage.one().getUrl('thumb') }}" alt="{{ title }}" />
+        </div>
+    {% endif %}
+
+    <div class="post-content">
+        <h3><a href="{{ url }}">{{ title }}</a></h3>
+        <p class="post-date">{{ postDate|date('F j, Y') }}</p>
+        {% if summary %}
+            <p>{{ summary }}</p>
+        {% endif %}
+        <a href="{{ url }}" class="read-more">Read More</a>
+    </div>
+</article>

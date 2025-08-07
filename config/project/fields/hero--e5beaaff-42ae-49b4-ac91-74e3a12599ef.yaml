@@ -1,0 +1,111 @@
+columnSuffix: null
+handle: hero
+instructions: null
+name: Hero
+searchable: false
+settings:
+  fieldLayouts:
+    __assoc__:
+      -
+        - fc3bfa44-dd36-4e01-b6a6-c375f1d1185c
+        -
+          __assoc__:
+            0:
+              - tabs
+              -
+                -
+                  __assoc__:
+                    0:
+                      - name
+                      - Content
+                    1:
+                      - uid
+                      - 21744d6d-e2aa-4a5a-b218-6c13d34ebfa7
+                    4:
+                      - elements
+                      -
+                        -
+                          __assoc__:
+                            0:
+                              - type
+                              - craft\fieldlayoutelements\CustomField
+                            6:
+                              - required
+                              - false
+                            7:
+                              - providesThumbs
+                              - false
+                            8:
+                              - includeInCards
+                              - false
+                            9:
+                              - width
+                              - 100
+                            10:
+                              - dateAdded
+                              - '2025-08-07T17:35:07+00:00'
+                            11:
+                              - uid
+                              - b9e6085e-9dbb-4bee-ad6b-c548b90f19a5
+                            14:
+                              - fieldUid
+                              - 41218836-6831-49f3-9a90-01aff59d5439 # Image
+                        -
+                          __assoc__:
+                            0:
+                              - type
+                              - craft\fieldlayoutelements\CustomField
+                            6:
+                              - required
+                              - false
+                            7:
+                              - providesThumbs
+                              - false
+                            8:
+                              - includeInCards
+                              - false
+                            9:
+                              - width
+                              - 100
+                            10:
+                              - dateAdded
+                              - '2025-08-07T17:35:07+00:00'
+                            11:
+                              - uid
+                              - 08b86a6f-a58b-4fa1-acfa-93601d6d1bce
+                            14:
+                              - fieldUid
+                              - 3e18e51e-c692-4a4c-86b7-8cb0277cfed7 # Text
+                        -
+                          __assoc__:
+                            0:
+                              - type
+                              - craft\fieldlayoutelements\CustomField
+                            6:
+                              - required
+                              - false
+                            7:
+                              - providesThumbs
+                              - false
+                            8:
+                              - includeInCards
+                              - false
+                            9:
+                              - width
+                              - 100
+                            10:
+                              - dateAdded
+                              - '2025-08-07T17:35:07+00:00'
+                            11:
+                              - uid
+                              - c2768d47-5c1c-4d2b-a1e5-815d2f439601
+                            14:
+                              - fieldUid
+                              - 614a0f80-17f1-41dd-bb25-adee56cc18e4 # Summary
+            3:
+              - cardThumbAlignment
+              - end
+  viewMode: grouped
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\ContentBlock

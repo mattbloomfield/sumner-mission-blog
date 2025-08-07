@@ -1,0 +1,243 @@
+{% extends "_layouts/generic-page-layout.twig" %}
+
+{% block title %}{{ entry.title ?? "Home - " ~ siteName }}{% endblock %}
+
+{% block content %}
+    <div class="homepage">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            {% if entry.hero is defined %}
+                <div class="hero-image">
+                    {% set heroImage = entry.hero.image.one() %}
+                    {% if heroImage is not null %}
+                        <img src="{{ heroImage.url }}" alt="{{ heroImage.title|default }}" />
+                    {% endif %}
+                    <div class="hero-overlay">
+                        {% if entry.text %}
+                            <h2 class="hero-headline">{{ entry.text }}</h2>
+                        {% endif %}
+                        {% if entry.summary %}
+                            <p class="hero-subtext">{{ entry.summary }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </section>
+
+        {% set pageComponents = entry.landingPageBuilder.all() %}
+        {% for component in pageComponents %}
+            {% switch component.type %}
+                {% case "titleText" %}
+                    {% include "_components/blocks/title-text/title-text.twig" with {
+                        title: component.title,
+                        text: component.summary
+                    } only %}
+
+                {% case "recentPosts" %}
+                    {% set posts = craft.entries.section('blog').limit(3).all() %}
+                    {% set items = [] %}
+                    {% for post in posts %}
+                        {% set items = items|merge([{
+                            type: "_components/cards/card",
+                            data: {
+                                title: post.title,
+                                url: post.url,
+                                featuredImage: post.featuredImage.one(),
+                                postDate: post.postDate,
+                                summary: post.summary
+                            }
+                        }]) %}
+                    {% endfor %}
+                    {% include "_components/listings/grid" with {
+                        title: component.title,
+                        items: items,
+                    } only %}
+
+                {% case "textCards" %}
+                {% set items = [] %}
+                {% for textCard in component.textCardMatrix %}
+                    {% set items = items|merge([{
+                        type: "_components/cards/info",
+                        data: {
+                            title: textCard.title,
+                            summary: textCard.summary,
+                        }
+                    }]) %}
+                {% endfor %}
+                {% include "_components/listings/grid" with {
+                    title: component.title,
+                    items: items,
+                } only %}
+            {% endswitch %}
+        {% endfor %}
+
+    </div>
+
+    <style>
+        .hero-section {
+            margin-bottom: 3rem;
+        }
+
+        .hero-image {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 3rem 2rem 2rem;
+            color: white;
+        }
+
+        .hero-headline {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-subtext {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .welcome-section {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .welcome-text {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .recent-posts {
+            margin-bottom: 3rem;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .post-preview {
+            background: #fafafa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .post-preview:hover {
+            transform: translateY(-2px);
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-content h3 a {
+            color: #4a3428;
+            text-decoration: none;
+        }
+
+        .post-content h3 a:hover {
+            color: #d4a574;
+        }
+
+        .post-date {
+            color: #8a7a6a;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: #d4a574;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .view-all-posts {
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #d4a574;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #c89666;
+        }
+
+        .mission-info {
+            background: #f7f3e9;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 3rem -2rem -2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            text-align: center;
+        }
+
+        .info-card h3 {
+            color: #d4a574;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-headline {
+                font-size: 2rem;
+            }
+
+            .hero-overlay {
+                padding: 2rem 1rem 1rem;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mission-info {
+                margin: 3rem -1.5rem -1.5rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+{% endblock %}

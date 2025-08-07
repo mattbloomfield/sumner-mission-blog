@@ -1,0 +1,53 @@
+color: null
+description: null
+fieldLayouts:
+  e4196bec-3893-491d-987e-c3ce82851546:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-08-07T20:15:05+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 25999d60-41d8-4455-bc91-048be510314b
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 60db0318-1c1c-49e2-b594-6e891c2e1784
+        userCondition: null
+handle: category
+hasTitleField: true
+icon: chess-rook
+name: Category
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
