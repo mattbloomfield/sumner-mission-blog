@@ -42,7 +42,10 @@
                             data: {
                                 title: post.title,
                                 url: post.url,
-                                featuredImage: post.featuredImage.one(),
+                                img: {
+                                    url: post.featuredImage.one().url,
+                                    caption: post.featuredImage.one().title|default
+                                },
                                 postDate: post.postDate,
                                 summary: post.summary
                             }
@@ -51,6 +54,10 @@
                     {% include "_components/listings/grid" with {
                         title: component.title,
                         items: items,
+                        link: {
+                            href: "/blog",
+                            text: "View All Posts",
+                        }
                     } only %}
 
                 {% case "textCards" %}

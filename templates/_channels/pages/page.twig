@@ -1,0 +1,11 @@
+{% extends "_layouts/generic-page-layout.twig" %}
+
+{% block title %}{{ entry.title ?? "Blog - " ~ siteName }}{% endblock %}
+
+{% block content %}
+    {% for chunk in entry.articleBody %}
+        <div class="chunk {{ chunk.type }}">
+            {{ chunk }}
+        </div>
+    {% endfor %}
+{% endblock %}

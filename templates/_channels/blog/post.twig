@@ -15,48 +15,42 @@
         </header>
 
         <div class="blog-posts">
-            {% for post in blogPosts %}
-                <article class="blog-post-card">
-                    {% if post.featuredImage.one() %}
-                        <div class="post-featured-image">
-                            <a href="{{ post.url }}">
-                                <img src="{{ post.featuredImage.one().getUrl() }}" alt="{{ post.title }}" />
-                            </a>
-                        </div>
-                    {% endif %}
+            <article class="blog-post-card">
+                {% if entry.featuredImage.one() %}
+                    <div class="post-featured-image">
+                        <a href="{{ entry.url }}">
+                            <img src="{{ entry.featuredImage.one().getUrl() }}" alt="{{ entry.title }}" />
+                        </a>
+                    </div>
+                {% endif %}
 
-                    <div class="post-card-content">
-                        <header class="post-header">
-                            <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-                            <div class="post-meta">
-                                <time datetime="{{ post.postDate|date('c') }}">{{ post.postDate|date('F j, Y') }}</time>
-                                {% if post.author %}
-                                    <span class="author">by {{ post.author.fullName ?? post.author.username }}</span>
-                                {% endif %}
-                                {% if post.categories.all()|length %}
-                                    <div class="post-categories">
-                                        {% for category in post.categories.all() %}
-                                            <span class="category-tag">{{ category.title }}</span>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </header>
-
-                        <div class="post-excerpt">
-                            {% if post.summary %}
-                                {{ post.summary }}
-                            {% else %}
-                                {{ post.body|striptags|slice(0, 200) }}...
+                <div class="post-card-content">
+                    <header class="post-header">
+                        <h2><a href="{{ entry.url }}">{{ entry.title }}</a></h2>
+                        <div class="post-meta">
+                            <time datetime="{{ entry.postDate|date('c') }}">{{ entry.postDate|date('F j, Y') }}</time>
+                            {% if entry.author %}
+                                <span class="author">by {{ entry.author.fullName ?? entry.author.username }}</span>
+                            {% endif %}
+                            {% if entry.categories.all()|length %}
+                                <div class="post-categories">
+                                    {% for category in entry.categories.all() %}
+                                        <span class="category-tag">{{ category.title }}</span>
+                                    {% endfor %}
+                                </div>
                             {% endif %}
                         </div>
+                    </header>
 
-                        <div class="post-body">
-
-                        </div>
+                    <div class="post-body">
+                        {% for chunk in entry.articleBody %}
+                            <div class="chunk {{ chunk.type }}">
+                                {{ chunk }}
+                            </div>
+                        {% endfor %}
                     </div>
-                </article>
-            {% endfor %}
+                </div>
+            </article>
         </div>
 
         <!-- Sidebar or Additional Content -->
@@ -71,7 +65,7 @@
                     <h3>Recent Posts</h3>
                     <ul class="recent-posts-sidebar">
                         {% for post in craft.entries.section('blog').limit(5).all() %}
-                            <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+                            <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>

@@ -1,7 +1,7 @@
 <article class="post-preview">
-    {% if featuredImage.one() %}
+    {% if img is not null %}
         <div class="post-image">
-            <img src="{{ featuredImage.one().getUrl('thumb') }}" alt="{{ title }}" />
+            <img src="{{ img.url }}" alt="{{ img.caption }}" />
         </div>
     {% endif %}
 

@@ -8,8 +8,10 @@
             {% endfor %}
         </div>
 
-        <div class="view-all-posts">
-            <a href="/blog" class="btn-primary">View All Posts</a>
-        </div>
+        {% if link is defined and link is not null %}
+            <div class="view-all-posts">
+                <a href="{{ link.href }}" class="btn-primary">{{ link.text }}</a>
+            </div>
+        {% endif %}
     </section>
 {% endif %}
