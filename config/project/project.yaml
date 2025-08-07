@@ -1,4 +1,4 @@
-dateModified: 1754598631
+dateModified: 1754600100
 email:
   fromEmail: heyitsjenni@gmail.com
   fromName: 'Paradise & Purpose: Sumner Stories'
@@ -25,7 +25,9 @@ meta:
     2d4bf084-4122-495b-a4c2-4ed36ec9baa8: 'Paradise & Purpose: Sumner Stories' # Paradise & Purpose: Sumner Stories
     2f0f1e53-f4c1-4cfd-ba53-119468ce45bd: Categories # Categories
     3e18e51e-c692-4a4c-86b7-8cb0277cfed7: Text # Text
+    3e35ebe5-8643-4578-8da6-ba8f027efe79: Large # Large
     4dff0120-ffae-422b-a9e0-390f0805085d: Images # Images
+    5a7e61d8-fa87-440e-874d-23c9b2f6f7c6: Medium # Medium
     6d17bbfd-6772-48ac-8ac2-8bfda31f7a71: 'Text Card' # Text Card
     7aebea11-377f-4c2b-9044-efcc61c4abcd: 'Recent Posts' # Recent Posts
     9deb1b78-d848-4c9a-a26e-ea8416d17c99: 'Pull Quote' # Pull Quote
@@ -41,6 +43,7 @@ meta:
     a6d8b248-c057-4a18-a1a1-8699ec65b85d: 'Article Body' # Article Body
     a7014023-8f58-49ee-aa06-81f4089e04c9: Post # Post
     ac73f4a2-97c5-4432-b1aa-ba7ac8c9c572: 'Home Page' # Home Page
+    ae562093-5d8c-49ed-8e0b-92254b62ba7b: Small # Small
     b4e28d0b-ce5e-4141-931a-ee0bf704617d: 'Title Text' # Title Text
     b582f59b-66d7-4ba3-8fd7-8c744ded6cde: Simple # Simple
     c7e96329-677b-46f3-b962-ea2f6434fb74: 'Paradise & Purpose: Sumner Stories' # Paradise & Purpose: Sumner Stories

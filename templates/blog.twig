@@ -1,8 +1,266 @@
 {% extends "_layouts/generic-page-layout.twig" %}
 
-{% block title %}{{ Blog ?? "Home - " ~ siteName }}{% endblock %}
+{% block title %}Our Mission Stories - {{ siteName }}{% endblock %}
 
 {% block content %}
-    {# list all the blog posts as previews #}
+    <div class="space-y-12">
+        <!-- Page Header -->
+        <header class="text-center space-y-6">
+            <div class="flex items-center justify-center mb-6">
+                <div class="h-px bg-gradient-to-r from-transparent via-coral-300 to-transparent flex-1"></div>
+                <div class="mx-6">
+                    <svg class="w-8 h-8 text-coral-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div class="h-px bg-gradient-to-r from-coral-300 via-transparent to-transparent flex-1"></div>
+            </div>
 
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-semibold text-ocean-800 leading-tight">
+                Our Mission Stories
+            </h1>
+
+            <p class="text-xl md:text-2xl text-ocean-600 leading-relaxed max-w-3xl mx-auto">
+                Follow our daily adventures and spiritual journey as we serve with love in the beautiful Caribbean islands.
+            </p>
+        </header>
+
+        <!-- Categories Filter (if categories exist) -->
+        {% set categories = craft.entries.section('categories').all() %}
+        {% if categories|length %}
+            <nav class="flex flex-wrap justify-center gap-3 py-6">
+                <a href="/blog"
+                   class="px-6 py-2 rounded-full transition-all duration-300 font-medium
+                          {{ craft.app.request.getParam('category') is empty ? 'bg-ocean-500 text-white shadow-lg' : 'bg-white text-ocean-700 hover:bg-ocean-100 border border-ocean-200' }}">
+                    All Stories
+                </a>
+                {% for category in categories %}
+                    <a href="/blog?category={{ category.slug }}"
+                       class="px-6 py-2 rounded-full transition-all duration-300 font-medium
+                              {{ craft.app.request.getParam('category') == category.slug ? 'bg-ocean-500 text-white shadow-lg' : 'bg-white text-ocean-700 hover:bg-ocean-100 border border-ocean-200' }}">
+                        {{ category.title }}
+                    </a>
+                {% endfor %}
+            </nav>
+        {% endif %}
+
+        <!-- Blog Posts Grid -->
+        {% set currentCategory = craft.app.request.getParam('category') %}
+        {% set postsQuery = craft.entries.section('blog').orderBy('postDate DESC') %}
+        {% if currentCategory %}
+            {% set postsQuery = postsQuery.relatedTo(craft.entries.section('categories').slug(currentCategory).one()) %}
+        {% endif %}
+        {% set posts = postsQuery.all() %}
+
+        {% if posts|length %}
+            <section class="space-y-8">
+                <div class="grid gap-8 md:gap-12">
+                    {% for post in posts %}
+                        <article class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2
+                                        {% if loop.first %}md:grid md:grid-cols-2 md:gap-8 lg:gap-12{% endif %}">
+
+                            {% set featuredImage = post.featuredImage.one() %}
+                            {% if featuredImage %}
+                                <div class="{% if loop.first %}md:order-{{ loop.index % 2 == 0 ? '2' : '1' }}{% endif %}">
+                                    <div class="aspect-video {% if not loop.first %}lg:aspect-[4/3]{% endif %} overflow-hidden {% if loop.first %}md:rounded-3xl{% endif %}">
+                                        <img src="{{ featuredImage.getUrl(loop.first ? 'large' : 'medium') }}"
+                                             alt="{{ post.title }}"
+                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <div class="p-8 {% if loop.first %}md:p-12{% else %}lg:p-10{% endif %} space-y-6 {% if loop.first %}md:flex md:flex-col md:justify-center{% endif %}">
+                                <!-- Post Meta -->
+                                <div class="flex flex-wrap items-center gap-4 text-sm">
+                                    <time datetime="{{ post.postDate|date('c') }}"
+                                          class="flex items-center space-x-2 text-ocean-600 font-medium">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                        <span>{{ post.postDate|date('F j, Y') }}</span>
+                                    </time>
+
+                                    {% if post.author %}
+                                        <div class="flex items-center space-x-2 text-ocean-600">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                            </svg>
+                                            <span>{{ post.author.fullName ?? post.author.username }}</span>
+                                        </div>
+                                    {% endif %}
+
+                                    {% if post.categories.all()|length %}
+                                        <div class="flex flex-wrap gap-2">
+                                            {% for category in post.categories.all() %}
+                                                <span class="px-3 py-1 bg-gradient-to-r from-coral-100 to-sand-100 text-coral-700 rounded-full text-xs font-medium border border-coral-200">
+                                                    {{ category.title }}
+                                                </span>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Post Title -->
+                                <h2 class="{% if loop.first %}text-3xl md:text-4xl lg:text-5xl{% else %}text-2xl md:text-3xl{% endif %} font-serif font-semibold text-ocean-800 leading-tight group-hover:text-coral-600 transition-colors duration-300">
+                                    <a href="{{ post.url }}" class="line-clamp-3">{{ post.title }}</a>
+                                </h2>
+
+                                <!-- Post Summary -->
+                                {% if post.summary %}
+                                    <p class="{% if loop.first %}text-lg md:text-xl{% else %}text-base md:text-lg{% endif %} text-ocean-600 leading-relaxed line-clamp-{{ loop.first ? '4' : '3' }}">
+                                        {{ post.summary }}
+                                    </p>
+                                {% endif %}
+
+                                <!-- Read More Link -->
+                                <div class="pt-4">
+                                    <a href="{{ post.url }}"
+                                       class="inline-flex items-center text-coral-600 hover:text-coral-700 font-semibold group/link
+                                              {% if loop.first %}text-lg{% endif %}">
+                                        Read Full Story
+                                        <svg class="ml-2 w-5 h-5 transform group-hover/link:translate-x-2 transition-transform duration-300"
+                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Add separator after featured post -->
+                        {% if loop.first and posts|length > 1 %}
+                            <div class="flex items-center justify-center my-16">
+                                <div class="h-px bg-gradient-to-r from-transparent via-sand-300 to-transparent flex-1"></div>
+                                <div class="mx-8">
+                                    <div class="w-3 h-3 bg-coral-400 rounded-full"></div>
+                                </div>
+                                <div class="h-px bg-gradient-to-r from-sand-300 via-transparent to-transparent flex-1"></div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <!-- Pagination would go here if needed -->
+                {% if posts|length > 10 %}
+                    <nav class="flex justify-center pt-12">
+                        <div class="flex space-x-2">
+                            <!-- Pagination buttons would go here -->
+                            <button class="px-4 py-2 bg-white border border-ocean-200 text-ocean-700 rounded-lg hover:bg-ocean-50 transition-colors">
+                                Previous
+                            </button>
+                            <button class="px-4 py-2 bg-ocean-500 text-white rounded-lg">1</button>
+                            <button class="px-4 py-2 bg-white border border-ocean-200 text-ocean-700 rounded-lg hover:bg-ocean-50 transition-colors">
+                                2
+                            </button>
+                            <button class="px-4 py-2 bg-white border border-ocean-200 text-ocean-700 rounded-lg hover:bg-ocean-50 transition-colors">
+                                Next
+                            </button>
+                        </div>
+                    </nav>
+                {% endif %}
+            </section>
+        {% else %}
+            <!-- Empty State -->
+            <section class="text-center py-20">
+                <div class="space-y-6">
+                    <div class="w-24 h-24 bg-gradient-to-br from-sand-200 to-coral-200 rounded-full mx-auto flex items-center justify-center">
+                        <svg class="w-12 h-12 text-sand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-serif font-semibold text-ocean-800">
+                        {% if currentCategory %}
+                            No stories found in this category
+                        {% else %}
+                            No stories yet
+                        {% endif %}
+                    </h2>
+                    <p class="text-ocean-600 max-w-md mx-auto">
+                        {% if currentCategory %}
+                            Try browsing all stories or check out other categories.
+                        {% else %}
+                            We're just getting started! Check back soon for inspiring stories from our mission.
+                        {% endif %}
+                    </p>
+                    {% if currentCategory %}
+                        <a href="/blog"
+                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-ocean-500 to-ocean-600 text-white font-medium rounded-full hover:from-ocean-600 hover:to-ocean-700 transform hover:scale-105 transition-all duration-200 shadow-lg">
+                            View All Stories
+                        </a>
+                    {% endif %}
+                </div>
+            </section>
+        {% endif %}
+
+        <!-- Newsletter Signup -->
+        <section class="bg-gradient-to-r from-sand-500 via-coral-500 to-sand-500 rounded-3xl p-8 md:p-12 text-white text-center relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20">
+                <svg viewBox="0 0 1200 120" class="w-full h-full">
+                    <path fill="currentColor" d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"></path>
+                </svg>
+            </div>
+
+            <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+                <h2 class="text-3xl md:text-4xl font-serif font-semibold">
+                    Stay Connected
+                </h2>
+                <p class="text-lg md:text-xl text-white/90 leading-relaxed">
+                    Get updates about our mission journey and inspiring stories delivered to your inbox.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto pt-4">
+                    <input type="email"
+                           placeholder="Your email address"
+                           class="flex-1 px-4 py-3 rounded-full text-ocean-800 placeholder-ocean-400 focus:outline-none focus:ring-4 focus:ring-white/30">
+                    <button class="px-6 py-3 bg-white text-coral-600 font-semibold rounded-full hover:bg-coral-50 transform hover:scale-105 transition-all duration-200 shadow-lg">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <style>
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .line-clamp-4 {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+
+    <script>
+        // Add scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const articles = document.querySelectorAll('article');
+
+            const articleObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 150);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+
+            articles.forEach(article => {
+                article.style.opacity = '0';
+                article.style.transform = 'translateY(40px)';
+                article.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                articleObserver.observe(article);
+            });
+        });
+    </script>
 {% endblock %}

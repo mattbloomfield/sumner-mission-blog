@@ -1,6 +1,6 @@
 {#
-Image Gallery Component
-Usage: {% include 'components/image-gallery.twig' with {
+Image Gallery Component - Beach Theme
+Usage: {% include '_components/blocks/image-gallery/image-gallery.twig' with {
     images: entry.galleryImages.all(),
     caption: 'Gallery caption',
     columns: 3,
@@ -13,32 +13,50 @@ Usage: {% include 'components/image-gallery.twig' with {
 {% set galleryId = 'gallery-' ~ random() %}
 {% set showCaption = caption is defined and caption is not empty %}
 
-<div class="image-gallery-component" data-columns="{{ galleryColumns }}">
+<div class="my-12 space-y-8">
     {% if showCaption %}
-        <div class="gallery-header">
-            <h3 class="gallery-caption">{{ caption }}</h3>
+        <div class="text-center space-y-4">
+            <h3 class="text-2xl md:text-3xl font-serif font-semibold text-ocean-800">
+                {{ caption }}
+            </h3>
+            <div class="w-24 h-1 bg-gradient-to-r from-coral-400 to-sand-400 mx-auto rounded-full"></div>
         </div>
     {% endif %}
 
     {% if images %}
-        <div class="gallery-grid" id="{{ galleryId }}">
+        <div class="grid gap-4
+                    {% if galleryColumns == 2 %}grid-cols-1 md:grid-cols-2
+                    {% elseif galleryColumns == 4 %}grid-cols-2 md:grid-cols-4
+                    {% elseif galleryColumns == 5 %}grid-cols-2 md:grid-cols-3 lg:grid-cols-5
+                    {% else %}grid-cols-1 md:grid-cols-2 lg:grid-cols-3{% endif %}"
+             id="{{ galleryId }}">
+
             {% for image in images %}
-                <div class="gallery-item">
+                <div class="group relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
                     {% if enableLightbox %}
                     <a href="{{ image.getUrl('large') }}"
-                       class="gallery-link"
+                       class="block relative"
                        data-lightbox="{{ galleryId }}"
                        data-title="{{ image.title ?? '' }}">
                         {% endif %}
 
-                        <div class="gallery-image-wrapper">
-                            <img
-                                    src="{{ image.getUrl('medium') }}"
-                                    alt="{{ image.title ?? 'Gallery image ' ~ loop.index }}"
-                                    loading="lazy"
-                            />
-                            <div class="gallery-overlay">
-                                <span class="gallery-zoom-icon">🔍</span>
+                        <div class="aspect-square overflow-hidden relative">
+                            <img src="{{ image.getUrl('medium') }}"
+                                 alt="{{ image.title ?? 'Gallery image ' ~ loop.index }}"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+
+                            <!-- Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-ocean-900/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                                <div class="text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    {% if enableLightbox %}
+                                        <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                                            </svg>
+                                        </div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
 
@@ -47,218 +65,47 @@ Usage: {% include 'components/image-gallery.twig' with {
                     {% endif %}
 
                     {% if image.title %}
-                        <div class="gallery-item-caption">
-                            {{ image.title }}
+                        <div class="p-4 bg-gradient-to-r from-sand-50 to-coral-50 border-t-2 border-coral-200">
+                            <p class="text-ocean-700 font-medium text-center text-sm leading-relaxed">
+                                {{ image.title }}
+                            </p>
                         </div>
                     {% endif %}
                 </div>
             {% endfor %}
         </div>
     {% else %}
-        <div class="gallery-empty">
-            <p>No images available for this gallery.</p>
+        <div class="text-center py-16 px-8 bg-gradient-to-br from-sand-50 to-coral-50 rounded-2xl border-2 border-dashed border-sand-300">
+            <div class="space-y-4">
+                <div class="w-16 h-16 bg-sand-200 rounded-full mx-auto flex items-center justify-center">
+                    <svg class="w-8 h-8 text-sand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                <p class="text-sand-600 font-medium">No images available for this gallery.</p>
+            </div>
         </div>
     {% endif %}
 </div>
 
-<style>
-    .image-gallery-component {
-        margin: 2rem 0;
-    }
-
-    .gallery-header {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .gallery-caption {
-        color: #4a3428;
-        font-size: 1.5rem;
-        margin: 0;
-        position: relative;
-        display: inline-block;
-    }
-
-    .gallery-caption:after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 3px;
-        background: #d4a574;
-        border-radius: 2px;
-    }
-
-    .gallery-grid {
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-
-    .gallery-grid[data-columns="2"] {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-
-    .gallery-grid[data-columns="4"] {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-
-    .gallery-grid[data-columns="5"] {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
-
-    .gallery-item {
-        position: relative;
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .gallery-item:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-
-    .gallery-link {
-        text-decoration: none;
-        color: inherit;
-        display: block;
-    }
-
-    .gallery-image-wrapper {
-        position: relative;
-        aspect-ratio: 4/3;
-        overflow: hidden;
-    }
-
-    .gallery-image-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-    }
-
-    .gallery-item:hover .gallery-image-wrapper img {
-        transform: scale(1.05);
-    }
-
-    .gallery-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(212, 165, 116, 0.8);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .gallery-item:hover .gallery-overlay {
-        opacity: 1;
-    }
-
-    .gallery-zoom-icon {
-        font-size: 2rem;
-        color: white;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-
-    .gallery-item-caption {
-        padding: 1rem;
-        background: linear-gradient(135deg, #f7f3e9 0%, #fdf6e3 100%);
-        color: #5a4a3a;
-        font-size: 0.9rem;
-        text-align: center;
-        border-top: 2px solid #d4a574;
-    }
-
-    .gallery-empty {
-        text-align: center;
-        padding: 3rem;
-        color: #8a7a6a;
-        background: #fafafa;
-        border-radius: 8px;
-        border: 2px dashed #e0d5c5;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .gallery-grid {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.75rem;
-        }
-
-        .gallery-grid[data-columns="2"] {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .gallery-grid[data-columns="3"] {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .gallery-grid[data-columns="4"],
-        .gallery-grid[data-columns="5"] {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 480px) {
-        .gallery-grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-
-        .gallery-grid[data-columns="2"] {
-            grid-template-columns: 1fr;
-        }
-
-        .gallery-item-caption {
-            padding: 0.75rem;
-            font-size: 0.85rem;
-        }
-    }
-
-    /* Lightbox enhancement styles */
-    .gallery-link:focus {
-        outline: 3px solid #d4a574;
-        outline-offset: 2px;
-    }
-
-    /* Animation for loading images */
-    .gallery-image-wrapper img[loading="lazy"] {
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .gallery-image-wrapper img[loading="lazy"].loaded {
-        opacity: 1;
-    }
-</style>
-
 <script>
-    // Simple lightbox functionality (optional enhancement)
+    // Enhanced gallery functionality
     document.addEventListener('DOMContentLoaded', function() {
-        // Add loaded class when images load
-        const lazyImages = document.querySelectorAll('.gallery-image-wrapper img[loading="lazy"]');
+        // Add loaded class when images load for smoother transitions
+        const lazyImages = document.querySelectorAll('.gallery-item img[loading="lazy"]');
         lazyImages.forEach(img => {
             if (img.complete) {
                 img.classList.add('loaded');
             } else {
                 img.addEventListener('load', function() {
                     this.classList.add('loaded');
+                    this.style.opacity = '1';
                 });
             }
         });
 
-        // Basic keyboard navigation for gallery items
-        const galleryLinks = document.querySelectorAll('.gallery-link');
+        // Keyboard navigation for gallery links
+        const galleryLinks = document.querySelectorAll('[data-lightbox] a');
         galleryLinks.forEach(link => {
             link.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -266,6 +113,30 @@ Usage: {% include 'components/image-gallery.twig' with {
                     this.click();
                 }
             });
+        });
+
+        // Add intersection observer for fade-in animation
+        const galleryObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '50px'
+        });
+
+        // Observe gallery items for animation
+        const galleryItems = document.querySelectorAll('#{{ galleryId }} > div');
+        galleryItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            galleryObserver.observe(item);
         });
     });
 </script>

@@ -1,6 +1,6 @@
 {#
-Pull Quote Component
-Usage: {% include 'components/pull-quote.twig' with {
+Pull Quote Component - Beach Theme
+Usage: {% include '_components/blocks/pull-quote/pull-quote.twig' with {
     quote: 'The inspiring quote text',
     attribution: 'Elder John Sumner',
     style: 'centered',
@@ -12,282 +12,113 @@ Usage: {% include 'components/pull-quote.twig' with {
 {% set quoteSize = size ?? 'medium' %}
 {% set showAttribution = attribution is defined and attribution is not empty %}
 
-<blockquote class="pull-quote-component {{ 'style-' ~ quoteStyle }} {{ 'size-' ~ quoteSize }}">
-    <div class="quote-content">
-        <div class="quote-mark quote-mark-open">"</div>
-        <div class="quote-text">
-            {{ quote }}
+<div class="my-12 {% if quoteStyle == 'floating-right' %}float-right ml-8 mb-6 max-w-md
+            {% elseif quoteStyle == 'floating-left' %}float-left mr-8 mb-6 max-w-md
+            {% elseif quoteStyle == 'centered' %}max-w-4xl mx-auto
+            {% else %}max-w-2xl{% endif %}">
+
+    <blockquote class="relative {% if quoteStyle == 'full-width' %}bg-gradient-to-r from-ocean-600 via-ocean-500 to-ocean-600 text-white p-8 md:p-12 rounded-3xl shadow-2xl
+                               {% else %}bg-gradient-to-br from-sand-50 via-white to-coral-50 p-8 rounded-2xl shadow-lg border border-sand-200{% endif %}
+                               transform hover:scale-105 transition-all duration-300">
+
+        <!-- Decorative quote marks -->
+        <div class="absolute -top-4 -left-4 w-16 h-16 {% if quoteStyle == 'full-width' %}bg-white/20 text-white{% else %}bg-gradient-to-br from-coral-400 to-sand-400 text-white{% endif %} rounded-full flex items-center justify-center shadow-lg">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+            </svg>
         </div>
-        <div class="quote-mark quote-mark-close">"</div>
-    </div>
 
-    {% if showAttribution %}
-        <footer class="quote-attribution">
-            <cite>{{ attribution }}</cite>
-        </footer>
-    {% endif %}
-</blockquote>
+        <!-- Quote content -->
+        <div class="relative {% if quoteStyle == 'centered' %}text-center{% endif %} space-y-6">
+            <p class="{% if quoteSize == 'small' %}text-lg
+                     {% elseif quoteSize == 'large' %}text-2xl md:text-3xl
+                     {% elseif quoteSize == 'xlarge' %}text-3xl md:text-4xl
+                     {% else %}text-xl md:text-2xl{% endif %}
+                     font-serif leading-relaxed
+                     {% if quoteStyle == 'full-width' %}text-white{% else %}text-ocean-800{% endif %}">
+                {{ quote }}
+            </p>
 
-<style>
-    .pull-quote-component {
-        margin: 3rem 0;
-        position: relative;
-        background: linear-gradient(135deg, #f7f3e9 0%, #fdf6e3 100%);
-        border-radius: 12px;
-        padding: 2.5rem;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-        border-left: 5px solid #d4a574;
-    }
+            {% if showAttribution %}
+                <footer class="{% if quoteStyle == 'centered' %}text-center{% else %}text-right{% endif %} relative">
+                    <div class="inline-flex items-center space-x-3
+                                {% if quoteStyle == 'full-width' %}text-white/90{% else %}text-ocean-600{% endif %}">
+                        <div class="w-12 h-px {% if quoteStyle == 'full-width' %}bg-white/30{% else %}bg-gradient-to-r from-coral-300 to-sand-300{% endif %}"></div>
+                        <cite class="font-medium not-italic">{{ attribution }}</cite>
+                    </div>
+                </footer>
+            {% endif %}
+        </div>
 
-    .quote-content {
-        position: relative;
-        display: flex;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
+        <!-- Background decoration -->
+        {% if quoteStyle == 'full-width' %}
+            <div class="absolute inset-0 opacity-10 pointer-events-none">
+                <svg viewBox="0 0 1200 120" class="w-full h-full">
+                    <path fill="currentColor" d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"></path>
+                </svg>
+            </div>
+        {% else %}
+            <!-- Subtle pattern overlay for non-full-width quotes -->
+            <div class="absolute inset-0 opacity-5 pointer-events-none">
+                <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" fill-rule="evenodd">
+                        <g fill="#D4A574" fill-opacity="0.4">
+                            <circle cx="30" cy="30" r="2"/>
+                            <circle cx="10" cy="10" r="1"/>
+                            <circle cx="50" cy="10" r="1"/>
+                            <circle cx="10" cy="50" r="1"/>
+                            <circle cx="50" cy="50" r="1"/>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+        {% endif %}
+    </blockquote>
+</div>
 
-    .quote-text {
-        flex: 1;
-        font-family: 'Georgia', serif;
-        line-height: 1.6;
-        color: #4a3428;
-        font-style: italic;
-    }
-
-    .quote-mark {
-        color: #d4a574;
-        font-family: 'Georgia', serif;
-        font-weight: bold;
-        line-height: 1;
-        opacity: 0.7;
-    }
-
-    .quote-mark-open {
-        font-size: 3rem;
-        margin-top: -0.5rem;
-    }
-
-    .quote-mark-close {
-        font-size: 3rem;
-        align-self: flex-end;
-        margin-bottom: -0.5rem;
-    }
-
-    .quote-attribution {
-        margin-top: 1.5rem;
-        text-align: right;
-        position: relative;
-    }
-
-    .quote-attribution:before {
-        content: '—';
-        margin-right: 0.5rem;
-        color: #d4a574;
-    }
-
-    .quote-attribution cite {
-        color: #8a7a6a;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 0.95rem;
-    }
-
-    /* Style variants */
-    .style-centered {
-        text-align: center;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .style-centered .quote-attribution {
-        text-align: center;
-    }
-
-    .style-left {
-        text-align: left;
-        margin-right: auto;
-        max-width: 600px;
-    }
-
-    .style-floating-right {
-        float: right;
-        max-width: 400px;
-        margin: 1rem 0 1rem 2rem;
-        clear: right;
-    }
-
-    .style-floating-left {
-        float: left;
-        max-width: 400px;
-        margin: 1rem 2rem 1rem 0;
-        clear: left;
-    }
-
-    .style-full-width {
-        max-width: 100%;
-        padding: 3rem;
-        margin: 4rem 0;
-        background: linear-gradient(135deg, #d4a574 0%, #c89666 100%);
-        color: white;
-        border-left: none;
-        border-top: 5px solid rgba(255,255,255,0.3);
-    }
-
-    .style-full-width .quote-text {
-        color: white;
-    }
-
-    .style-full-width .quote-mark {
-        color: rgba(255,255,255,0.7);
-    }
-
-    .style-full-width .quote-attribution cite {
-        color: rgba(255,255,255,0.9);
-    }
-
-    /* Size variants */
-    .size-small .quote-text {
-        font-size: 1rem;
-    }
-
-    .size-small .quote-mark-open,
-    .size-small .quote-mark-close {
-        font-size: 2rem;
-    }
-
-    .size-medium .quote-text {
-        font-size: 1.2rem;
-    }
-
-    .size-medium .quote-mark-open,
-    .size-medium .quote-mark-close {
-        font-size: 3rem;
-    }
-
-    .size-large .quote-text {
-        font-size: 1.4rem;
-    }
-
-    .size-large .quote-mark-open,
-    .size-large .quote-mark-close {
-        font-size: 4rem;
-    }
-
-    .size-xlarge .quote-text {
-        font-size: 1.6rem;
-    }
-
-    .size-xlarge .quote-mark-open,
-    .size-xlarge .quote-mark-close {
-        font-size: 5rem;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .pull-quote-component {
-            margin: 2rem 0;
-            padding: 2rem;
-        }
-
-        .style-floating-left,
-        .style-floating-right {
-            float: none;
-            max-width: 100%;
-            margin: 2rem 0;
-        }
-
-        .style-full-width {
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .quote-mark-open,
-        .quote-mark-close {
-            font-size: 2.5rem !important;
-        }
-
-        .size-large .quote-text,
-        .size-xlarge .quote-text {
-            font-size: 1.2rem;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .pull-quote-component {
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .quote-content {
-            flex-direction: column;
-            gap: 0;
-        }
-
-        .quote-mark-open {
-            align-self: flex-start;
-            margin-bottom: -1rem;
-        }
-
-        .quote-mark-close {
-            align-self: flex-end;
-            margin-top: -1rem;
-        }
-
-        .quote-text {
-            padding: 0 1rem;
-        }
-    }
-
-    /* Animation on scroll (optional enhancement) */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .pull-quote-component.animate-in {
-        animation: fadeInUp 0.6s ease-out;
-    }
-
-    /* High contrast mode support */
-    @media (prefers-contrast: high) {
-        .pull-quote-component {
-            border-left-width: 8px;
-            border-left-color: #000;
-        }
-
-        .style-full-width {
-            background: #000;
-            color: #fff;
-            border-top-color: #fff;
-        }
-    }
-</style>
+<!-- Clear floats if needed -->
+{% if quoteStyle in ['floating-left', 'floating-right'] %}
+    <div class="clear-both"></div>
+{% endif %}
 
 <script>
-    // Optional: Add scroll animation
     document.addEventListener('DOMContentLoaded', function() {
-        const quotes = document.querySelectorAll('.pull-quote-component');
+        // Add scroll animation for pull quotes
+        const quotes = document.querySelectorAll('blockquote');
 
-        const observer = new IntersectionObserver((entries) => {
+        const quoteObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
                 }
             });
         }, {
-            threshold: 0.1,
+            threshold: 0.3,
             rootMargin: '50px'
         });
 
         quotes.forEach(quote => {
-            observer.observe(quote);
+            quote.style.opacity = '0';
+            quote.style.transform = 'translateY(30px) scale(0.95)';
+            quote.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            quoteObserver.observe(quote);
         });
     });
 </script>
+
+<style>
+    .clear-both {
+        clear: both;
+    }
+
+    @media (max-width: 768px) {
+        /* Ensure floating quotes don't float on mobile */
+        .float-right,
+        .float-left {
+            float: none !important;
+            margin: 2rem 0 !important;
+            max-width: 100% !important;
+        }
+    }
+</style>
