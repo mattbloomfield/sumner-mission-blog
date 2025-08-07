@@ -9,7 +9,7 @@ settings:
   characterLimit: null
   ckeConfig: b582f59b-66d7-4ba3-8fd7-8c744ded6cde # Simple
   createButtonLabel: null
-  defaultTransform: null
+  defaultTransform: 5a7e61d8-fa87-440e-874d-23c9b2f6f7c6 # Medium
   entryTypes:
     -
       __assoc__:

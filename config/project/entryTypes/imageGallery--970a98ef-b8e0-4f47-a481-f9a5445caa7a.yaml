@@ -8,10 +8,10 @@ fieldLayouts:
         elementCondition: null
         elements:
           -
-            dateAdded: '2025-08-07T18:52:17+00:00'
+            dateAdded: '2025-08-07T21:40:13+00:00'
             editCondition: null
             elementCondition: null
-            fieldUid: 3705ed95-e2d4-4230-b223-acc8ff4e7283 # Image Gallery Matrix
+            fieldUid: 6686249d-c925-4721-bf51-ed5fc9c5e5fb # Images
             handle: null
             includeInCards: false
             instructions: null
@@ -20,7 +20,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 589fa313-9e03-4455-8f45-0b32bedc2a19
+            uid: 628ca5d9-2073-4a98-8bab-a6f9d05a7fc9
             userCondition: null
             warning: null
             width: 100
