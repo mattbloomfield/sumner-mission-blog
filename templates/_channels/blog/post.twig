@@ -1,6 +1,6 @@
 {% extends "_layouts/generic-page-layout.twig" %}
 
-{% block title %}{{ entry.title ?? "Blog - " ~ siteName }}{% endblock %}
+{% block title %}{{ entry.title ~ ' - ' ~ siteName }}- {% endblock %}
 
 {% block content %}
     <div class="max-w-4xl mx-auto">
@@ -40,14 +40,13 @@
                     </time>
                 </div>
 
-                {% if entry.author %}
-                    <div class="flex items-center space-x-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                        </svg>
-                        <span class="font-medium">{{ entry.author.fullName ?? entry.author.username }}</span>
-                    </div>
-                {% endif %}
+{#                {% if entry.author %}#}
+{#                    <div class="flex items-center space-x-2">#}
+{#                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">#}
+{#                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>#}
+{#                        </svg>#}
+{#                    </div>#}
+{#                {% endif %}#}
             </div>
         </header>
 

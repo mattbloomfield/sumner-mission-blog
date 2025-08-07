@@ -1,6 +1,6 @@
 {% extends "_layouts/generic-page-layout.twig" %}
 
-{% block title %}{{ entry.title ?? "Home - " ~ siteName }}{% endblock %}
+{% block title %}{{ entry.title ~ ' - ' ~ siteName }}- {% endblock %}
 
 {% block content %}
     <div class="space-y-16">
