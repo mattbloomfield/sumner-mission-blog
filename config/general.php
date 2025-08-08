@@ -23,6 +23,6 @@ return GeneralConfig::create()
     ->preventUserEnumeration()
     // Set the @webroot alias so the clear-caches command knows where to find CP resources
     ->aliases([
-        '@webroot' => CRAFT_BASE_PATH . '/web',
+        '@webroot' => getenv('CRAFT_WEB_ROOT'),
     ])
 ;
