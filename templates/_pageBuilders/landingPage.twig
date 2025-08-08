@@ -1,0 +1,50 @@
+<!-- Page Builder Components -->
+{% for component in components %}
+    {% switch component.type %}
+
+    {% case "titleText" %}
+        {% include '_components/blocks/title-text/title-text' with {
+            title: component.title,
+            summary: component.summary,
+        } only %}
+
+    {% case "recentPosts" %}
+        {% include '_components/blocks/recent-posts/recent-posts' with {
+            title: component.title,
+            summary: component.summary,
+            posts: craft.entries.section('blog').limit(3).all(),
+            link: {
+                href: '/blog',
+                text: 'View All Stories',
+            }
+        } only %}
+
+    {% case "textCards" %}
+        {% include '_components/blocks/text-3-up/text-3-up' with {
+            title: component.title,
+            cards: component.textCardMatrix.all()
+        } only %}
+
+    {% case 'newsletterSignup' %}
+        {% include '_components/blocks/newsletter/newsletter' with {
+            heading: component.title,
+            text: component.text,
+        } only %}
+
+    {% case 'cta' %}
+        {% include '_components/blocks/cta/cta' with {
+            heading: component.title,
+            text: component.text,
+            btnPrimary: {
+                href: component.btnPrimary.url,
+                text: component.btnPrimary.label,
+            },
+            btnSecondary: {
+                href: component.btnSecondary.url,
+                text: component.btnSecondary.label,
+            },
+            background: true,
+        } only %}
+
+    {% endswitch %}
+{% endfor %}

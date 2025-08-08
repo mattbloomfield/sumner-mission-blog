@@ -1,0 +1,54 @@
+<article class=" ">
+
+    {% for chunk in articleBody %}
+        {% set chunkType = chunk.type == 'entry' ? chunk.entry.type : chunk.type %}
+        {% switch chunkType %}
+        {% case "image" %}
+            {% include "_components/blocks/image/image.twig" with {
+                image: chunk.image.one(),
+                caption: chunk.title,
+                size: 'large',
+                alignment: 'center'
+            } only %}
+
+        {% case "imageGallery" %}
+            {% set galleryImages = [] %}
+            {% for galleryBlock in chunk.imageGalleryMatrix.all() %}
+                {% set galleryImages = galleryImages|merge([galleryBlock.image.one()]) %}
+            {% endfor %}
+            {% include "_components/blocks/image-gallery/image-gallery.twig" with {
+                images: galleryImages,
+                caption: chunk.title ?? 'Photo Gallery',
+                columns: 3,
+                lightbox: true
+            } only %}
+
+        {% case "pullQuote" %}
+            {% include "_components/blocks/pull-quote/pull-quote.twig" with {
+                quote: chunk.quote,
+                attribution: chunk.attribution,
+                style: 'centered',
+                size: 'medium'
+            } only %}
+
+        {% case 'cta' %}
+            {% include '_components/blocks/cta/cta' with {
+                heading: chunk.entry.title,
+                text: chunk.entry.text,
+                btnPrimary: {
+                    href: chunk.entry.btnPrimary.url,
+                    text: chunk.entry.btnPrimary.label,
+                },
+                btnSecondary: {
+                    href: chunk.entry.btnSecondary.url,
+                    text: chunk.entry.btnSecondary.label,
+                },
+            } only %}
+
+        {% default %}
+            <div class="prose">
+                {{ chunk }}
+            </div>
+        {% endswitch %}
+    {% endfor %}
+</article>

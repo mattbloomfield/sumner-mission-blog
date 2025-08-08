@@ -1,0 +1,427 @@
+<script>
+        tailwind.config = {
+        theme: {
+        extend: {
+        colors: {
+        ocean: {
+        50: '#f0fdff',
+        100: '#ccfbff',
+        200: '#99f6ff',
+        300: '#60ebff',
+        400: '#1dd7ff',
+        500: '#00b8e6',
+        600: '#0291c2',
+        700: '#0a749d',
+        800: '#105e7d',
+        900: '#134e6a'
+    },
+        sand: {
+        50: '#fefcf3',
+        100: '#fef7e0',
+        200: '#fcedc0',
+        300: '#f9de95',
+        400: '#f5c968',
+        500: '#f1b544',
+        600: '#e59819',
+        700: '#bf7a15',
+        800: '#9a6018',
+        900: '#7c4f19'
+    },
+        coral: {
+        50: '#fef7f0',
+        100: '#feede1',
+        200: '#fcd8c2',
+        300: '#f9bb98',
+        400: '#f59e6c',
+        500: '#f07142',
+        600: '#e2562a',
+        700: '#bc4220',
+        800: '#95371f',
+        900: '#78311d'
+    }
+    },
+        fontFamily: {
+        'serif': ['Crimson Text', 'Georgia', 'serif'],
+        'sans': ['Inter', 'system-ui', 'sans-serif']
+    },
+        typography: {
+        DEFAULT: {
+        css: {
+        // Base prose styles
+        color: '#105e7d', // ocean-800
+        fontSize: '1.125rem',
+        lineHeight: '1.75',
+        maxWidth: 'none',
+
+        // Headings
+        'h1, h2, h3, h4, h5, h6': {
+        fontFamily: 'Crimson Text, Georgia, serif',
+        fontWeight: '600',
+        color: '#105e7d', // ocean-800
+        lineHeight: '1.25',
+    },
+        'h1': {
+        fontSize: '2.25rem',
+        marginBottom: '2rem',
+        textAlign: 'center',
+    },
+        'h2': {
+        fontSize: '1.875rem',
+        marginTop: '3rem',
+        marginBottom: '1.5rem',
+        color: '#0a749d', // ocean-700
+    },
+        'h3': {
+        fontSize: '1.5rem',
+        marginTop: '2.5rem',
+        marginBottom: '1rem',
+        color: '#0a749d', // ocean-700
+    },
+        'h4': {
+        fontSize: '1.25rem',
+        marginTop: '2rem',
+        marginBottom: '0.75rem',
+        color: '#0291c2', // ocean-600
+    },
+
+        // Paragraphs
+        'p': {
+        color: '#0a749d', // ocean-700
+        lineHeight: '1.75',
+        marginBottom: '1.5rem',
+    },
+
+        // Links
+        'a': {
+        color: '#e2562a', // coral-600
+        textDecoration: 'none',
+        fontWeight: '500',
+        '&:hover': {
+        color: '#bc4220', // coral-700
+        textDecoration: 'underline',
+    }
+    },
+
+        // Strong and emphasis
+        'strong': {
+        color: '#105e7d', // ocean-800
+        fontWeight: '600',
+    },
+        'em': {
+        color: '#0291c2', // ocean-600
+        fontStyle: 'italic',
+    },
+
+        // Blockquotes
+        'blockquote': {
+        borderLeftWidth: '4px',
+        borderLeftColor: '#f9bb98', // coral-300
+        background: 'linear-gradient(to right, #fefcf3, #fef7f0)', // sand-50 to coral-50
+        padding: '1.5rem',
+        borderRadius: '0 0.75rem 0.75rem 0',
+        fontStyle: 'normal',
+        color: '#0a749d', // ocean-700
+        marginTop: '2rem',
+        marginBottom: '2rem',
+    },
+
+        // Lists
+        'ul, ol': {
+        marginTop: '1.25rem',
+        marginBottom: '1.25rem',
+        paddingLeft: '1.5rem',
+    },
+        'li': {
+        color: '#0a749d', // ocean-700
+        lineHeight: '1.75',
+        marginBottom: '0.5rem',
+    },
+        'li::marker': {
+        color: '#f07142', // coral-500
+    },
+
+        // Code
+        'code': {
+        backgroundColor: '#fef7e0', // sand-100
+        color: '#bc4220', // coral-700
+        padding: '0.25rem 0.5rem',
+        borderRadius: '0.25rem',
+        fontSize: '0.875rem',
+    },
+        'pre': {
+        backgroundColor: '#134e6a', // ocean-900
+        color: '#fef7e0', // sand-100
+        borderRadius: '0.75rem',
+        padding: '1.5rem',
+        overflow: 'auto',
+    },
+
+        // HR
+        'hr': {
+        borderColor: '#f9de95', // sand-300
+        marginTop: '3rem',
+        marginBottom: '3rem',
+    },
+
+        // Images
+        'img': {
+        borderRadius: '0.75rem',
+        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+    },
+
+        // Tables
+        'table': {
+        width: '100%',
+        borderCollapse: 'collapse',
+        marginTop: '2rem',
+        marginBottom: '2rem',
+    },
+        'th': {
+        backgroundColor: '#ccfbff', // ocean-100
+        color: '#105e7d', // ocean-800
+        fontWeight: '600',
+        padding: '0.75rem',
+        borderBottom: '2px solid #f9bb98', // coral-300
+    },
+        'td': {
+        padding: '0.75rem',
+        borderBottom: '1px solid #f9de95', // sand-300
+    },
+        'tbody tr:hover': {
+        backgroundColor: '#fefcf3', // sand-50
+    }
+    }
+    },
+        lg: {
+        css: {
+        fontSize: '1.25rem',
+        lineHeight: '1.75',
+        'h1': {
+        fontSize: '3rem',
+    },
+        'h2': {
+        fontSize: '2.25rem',
+    },
+        'h3': {
+        fontSize: '1.875rem',
+    },
+        'h4': {
+        fontSize: '1.5rem',
+    },
+        'p': {
+        marginBottom: '1.75rem',
+    }
+    }
+    },
+        xl: {
+        css: {
+        fontSize: '1.375rem',
+        lineHeight: '1.8',
+        'h1': {
+        fontSize: '3.5rem',
+    },
+        'h2': {
+        fontSize: '2.5rem',
+    },
+        'h3': {
+        fontSize: '2rem',
+    },
+        'h4': {
+        fontSize: '1.75rem',
+    },
+        'p': {
+        marginBottom: '2rem',
+    }
+    }
+    }
+    }
+    }
+    },
+        plugins: [
+        // Enable typography plugin
+        function({ addUtilities, addComponents, e, prefix, config, theme }) {
+        // Add custom prose utilities
+        addComponents({
+        '.prose': {
+        color: theme('colors.ocean.700'),
+        maxWidth: 'none',
+        fontSize: '1.125rem',
+        lineHeight: '1.75',
+        '& > *': {
+        marginTop: '0',
+        marginBottom: '1rem',
+    },
+        '& h1, & h2, & h3, & h4, & h5, & h6': {
+        fontFamily: theme('fontFamily.serif'),
+        fontWeight: '600',
+        color: theme('colors.ocean.800'),
+        lineHeight: '1.25',
+        marginTop: '2rem',
+        marginBottom: '1rem',
+    },
+        '& h1': {
+        fontSize: '2.25rem',
+        textAlign: 'center',
+        marginBottom: '2rem',
+    },
+        '& h2': {
+        fontSize: '1.875rem',
+        marginTop: '3rem',
+        color: theme('colors.ocean.700'),
+    },
+        '& h3': {
+        fontSize: '1.5rem',
+        marginTop: '2.5rem',
+        color: theme('colors.ocean.700'),
+    },
+        '& h4': {
+        fontSize: '1.25rem',
+        marginTop: '2rem',
+        color: theme('colors.ocean.600'),
+    },
+        '& p': {
+        color: theme('colors.ocean.700'),
+        marginBottom: '1.5rem',
+        lineHeight: '1.75',
+    },
+        '& a': {
+        color: theme('colors.coral.600'),
+        textDecoration: 'none',
+        fontWeight: '500',
+        '&:hover': {
+        color: theme('colors.coral.700'),
+        textDecoration: 'underline',
+    }
+    },
+        '& strong': {
+        color: theme('colors.ocean.800'),
+        fontWeight: '600',
+    },
+        '& em': {
+        color: theme('colors.ocean.600'),
+        fontStyle: 'italic',
+    },
+        '& blockquote': {
+        borderLeftWidth: '4px',
+        borderLeftColor: theme('colors.coral.300'),
+        background: `linear-gradient(to right, ${theme('colors.sand.50')}, ${theme('colors.coral.50')})`,
+        padding: '1.5rem',
+        borderRadius: '0 0.75rem 0.75rem 0',
+        fontStyle: 'normal',
+        color: theme('colors.ocean.700'),
+        margin: '2rem 0',
+    },
+        '& ul, & ol': {
+        paddingLeft: '1.5rem',
+        margin: '1.25rem 0',
+    },
+        '& li': {
+        color: theme('colors.ocean.700'),
+        lineHeight: '1.75',
+        marginBottom: '0.5rem',
+    },
+        '& li::marker': {
+        color: theme('colors.coral.500'),
+    },
+        '& code': {
+        backgroundColor: theme('colors.sand.100'),
+        color: theme('colors.coral.700'),
+        padding: '0.25rem 0.5rem',
+        borderRadius: '0.25rem',
+        fontSize: '0.875rem',
+    },
+        '& pre': {
+        backgroundColor: theme('colors.ocean.900'),
+        color: theme('colors.sand.100'),
+        borderRadius: '0.75rem',
+        padding: '1.5rem',
+        overflow: 'auto',
+        margin: '2rem 0',
+    },
+        '& hr': {
+        borderColor: theme('colors.sand.300'),
+        margin: '3rem 0',
+    },
+        '& img': {
+        borderRadius: '0.75rem',
+        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+        margin: '2rem 0',
+    },
+        '& table': {
+        width: '100%',
+        borderCollapse: 'collapse',
+        margin: '2rem 0',
+    },
+        '& th': {
+        backgroundColor: theme('colors.ocean.100'),
+        color: theme('colors.ocean.800'),
+        fontWeight: '600',
+        padding: '0.75rem',
+        borderBottom: `2px solid ${theme('colors.coral.300')}`,
+    },
+        '& td': {
+        padding: '0.75rem',
+        borderBottom: `1px solid ${theme('colors.sand.300')}`,
+    },
+        '& tbody tr:hover': {
+        backgroundColor: theme('colors.sand.50'),
+    }
+    },
+        '.prose-lg': {
+        fontSize: '1.25rem',
+        '& h1': { fontSize: '3rem' },
+        '& h2': { fontSize: '2.25rem' },
+        '& h3': { fontSize: '1.875rem' },
+        '& h4': { fontSize: '1.5rem' },
+        '& p': { marginBottom: '1.75rem' }
+    },
+        '.prose-xl': {
+        fontSize: '1.375rem',
+        lineHeight: '1.8',
+        '& h1': { fontSize: '3.5rem' },
+        '& h2': { fontSize: '2.5rem' },
+        '& h3': { fontSize: '2rem' },
+        '& h4': { fontSize: '1.75rem' },
+        '& p': { marginBottom: '2rem' }
+    },
+        // Custom modifier classes for your theme
+        '.prose-headings\\:font-serif': {
+        '& h1, & h2, & h3, & h4, & h5, & h6': {
+        fontFamily: theme('fontFamily.serif'),
+    }
+    },
+        '.prose-headings\\:text-ocean-800': {
+        '& h1, & h2, & h3, & h4, & h5, & h6': {
+        color: theme('colors.ocean.800'),
+    }
+    },
+        '.prose-p\\:text-ocean-700': {
+        '& p': {
+        color: theme('colors.ocean.700'),
+    }
+    },
+        '.prose-a\\:text-coral-600': {
+        '& a': {
+        color: theme('colors.coral.600'),
+    }
+    },
+        '.prose-a\\:no-underline': {
+        '& a': {
+        textDecoration: 'none',
+    }
+    },
+        '.prose-strong\\:text-ocean-800': {
+        '& strong': {
+        color: theme('colors.ocean.800'),
+    }
+    },
+        '.prose-blockquote\\:border-coral-300': {
+        '& blockquote': {
+        borderLeftColor: theme('colors.coral.300'),
+    }
+    }
+    });
+    }
+        ]
+    }
+</script>

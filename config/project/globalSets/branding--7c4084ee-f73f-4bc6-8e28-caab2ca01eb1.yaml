@@ -1,0 +1,30 @@
+fieldLayouts:
+  307b5b93-99d3-4391-b565-356b75461e37:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2025-08-07T22:35:25+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 3e18e51e-c692-4a4c-86b7-8cb0277cfed7 # Text
+            handle: tag
+            includeInCards: false
+            instructions: null
+            label: Tagline
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 588268f1-961e-40d0-97b7-b66318c2790c
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: e07d6332-c5d8-44a9-921e-bb21b5f56403
+        userCondition: null
+handle: branding
+name: Branding
+sortOrder: 1

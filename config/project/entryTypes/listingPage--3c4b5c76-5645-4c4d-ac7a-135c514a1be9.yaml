@@ -1,0 +1,87 @@
+color: green
+description: null
+fieldLayouts:
+  db79802b-5b23-4c2a-84ae-436c629d6561:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-08-07T22:21:01+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 79dfceb5-7184-4756-bfd7-83ca1a290538
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-08-07T22:23:02+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: f5cc05b7-f22f-406d-a1fb-e3ebad4efe88 # Post
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cc211aa1-012f-41f1-b5b3-9b2f426975fb
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-08-07T22:38:59+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 2203e170-2325-472d-b713-296a3eeed211 # Landing Page Builder
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d9757d6e-9c72-4b84-b27c-b455ba0dc71b
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: fba82189-d94a-4e9d-b7c9-f30fcc183383
+        userCondition: null
+handle: listingPage
+hasTitleField: true
+icon: list
+name: 'Listing Page'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

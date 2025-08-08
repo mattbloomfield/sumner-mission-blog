@@ -2,10 +2,10 @@ defaultPlacement: end
 enableVersioning: true
 entryTypes:
   -
-    uid: c66db33d-32d0-4de9-b66f-7ca99a02814f # Page
-handle: pages
+    uid: f30637bd-6b54-4cd7-8889-2a5b4ef3ba40 # Nav Item
+handle: navigation
 maxAuthors: 1
-name: Pages
+name: Navigation
 previewTargets:
   -
     __assoc__:
@@ -22,7 +22,10 @@ propagationMethod: all
 siteSettings:
   c7e96329-677b-46f3-b962-ea2f6434fb74: # Another Side of Heaven
     enabledByDefault: true
-    hasUrls: true
-    template: _channels/pages/page.twig
-    uriFormat: '{slug}'
-type: channel
+    hasUrls: false
+    template: null
+    uriFormat: null
+structure:
+  maxLevels: null
+  uid: 43965a68-2772-4069-bdb5-fb817377b5ad
+type: structure

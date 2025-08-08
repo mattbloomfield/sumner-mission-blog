@@ -1,0 +1,70 @@
+color: red
+description: null
+fieldLayouts:
+  50951b76-ee4f-4d8a-9a03-4eaa9793e94c:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-08-07T22:37:05+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 0d2b423c-e32f-4500-9fb8-cda19e4a06c0
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-08-07T22:38:32+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 3e18e51e-c692-4a4c-86b7-8cb0277cfed7 # Text
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: adf8b59c-4cee-4b0d-bba4-aef6f820aad6
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 92e88ee2-b1a8-44af-ac06-accb03b840ef
+        userCondition: null
+handle: newsletterSignup
+hasTitleField: true
+icon: envelope
+name: 'Newsletter Signup'
+showSlugField: false
+showStatusField: false
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

@@ -1,8 +1,9 @@
 baseUrl: $PRIMARY_SITE_URL
+enabled: true
 handle: default
 hasUrls: true
 language: en
-name: 'Paradise & Purpose: Sumner Stories'
+name: 'Another Side of Heaven'
 primary: true
 siteGroup: 2d4bf084-4122-495b-a4c2-4ed36ec9baa8 # Paradise & Purpose: Sumner Stories
 sortOrder: 1

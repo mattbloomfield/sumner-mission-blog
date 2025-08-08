@@ -1175,11 +1175,6 @@
         {
             "name": "graham-campbell/result-type",
             "version": "v1.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/GrahamCampbell/Result-Type.git",
-                "reference": "3ba905c11371512af9d9bdd27d99b782216b6945"
-            },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/GrahamCampbell/Result-Type/zipball/3ba905c11371512af9d9bdd27d99b782216b6945",
@@ -1190,16 +1185,12 @@
                 "php": "^7.2.5 || ^8.0",
                 "phpoption/phpoption": "^1.9.3"
             },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5.39 || ^9.6.20 || ^10.5.28"
-            },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "GrahamCampbell\\ResultType\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1217,20 +1208,6 @@
                 "Result Type",
                 "Result-Type",
                 "result"
-            ],
-            "support": {
-                "issues": "https://github.com/GrahamCampbell/Result-Type/issues",
-                "source": "https://github.com/GrahamCampbell/Result-Type/tree/v1.1.3"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/GrahamCampbell",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/graham-campbell/result-type",
-                    "type": "tidelift"
-                }
             ],
             "time": "2024-07-20T21:45:45+00:00"
         },
@@ -2653,11 +2630,6 @@
         {
             "name": "phpoption/phpoption",
             "version": "1.9.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/schmittjoh/php-option.git",
-                "reference": "e3fac8b24f56113f7cb96af14958c0dd16330f54"
-            },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/e3fac8b24f56113f7cb96af14958c0dd16330f54",
@@ -2666,10 +2638,6 @@
             },
             "require": {
                 "php": "^7.2.5 || ^8.0"
-            },
-            "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.8.2",
-                "phpunit/phpunit": "^8.5.39 || ^9.6.20 || ^10.5.28"
             },
             "type": "library",
             "extra": {
@@ -2686,7 +2654,6 @@
                     "PhpOption\\": "src/PhpOption/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache-2.0"
             ],
@@ -2708,20 +2675,6 @@
                 "option",
                 "php",
                 "type"
-            ],
-            "support": {
-                "issues": "https://github.com/schmittjoh/php-option/issues",
-                "source": "https://github.com/schmittjoh/php-option/tree/1.9.3"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/GrahamCampbell",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/phpoption/phpoption",
-                    "type": "tidelift"
-                }
             ],
             "time": "2024-07-20T21:41:07+00:00"
         },
@@ -7225,11 +7178,6 @@
         {
             "name": "craftcms/generator",
             "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/craftcms/generator.git",
-                "reference": "24be47edbf77b5b34302173c9c33e85e1b2202e5"
-            },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/craftcms/generator/zipball/24be47edbf77b5b34302173c9c33e85e1b2202e5",
@@ -7242,11 +7190,6 @@
                 "nikic/php-parser": "^5.0",
                 "php": "^8.2"
             },
-            "require-dev": {
-                "craftcms/ecs": "dev-main",
-                "craftcms/phpstan": "dev-main",
-                "pestphp/pest": "^1.22"
-            },
             "type": "yii2-extension",
             "extra": {
                 "bootstrap": "craft\\generator\\Extension"
@@ -7256,7 +7199,6 @@
                     "craft\\generator\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "mit"
             ],
@@ -7276,8 +7218,8 @@
             "support": {
                 "email": "support@craftcms.com",
                 "issues": "https://github.com/craftcms/generator/issues?state=open",
-                "rss": "https://github.com/craftcms/generator/releases.atom",
-                "source": "https://github.com/craftcms/generator"
+                "source": "https://github.com/craftcms/generator",
+                "rss": "https://github.com/craftcms/generator/releases.atom"
             },
             "time": "2025-05-29T18:12:44+00:00"
         },
@@ -7744,11 +7686,11 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
+    "platform": {},
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.2"
     },

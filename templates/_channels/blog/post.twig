@@ -67,132 +67,18 @@
             </figure>
         {% endif %}
 
-        <!-- Article Content -->
-        <article class="prose prose-lg md:prose-xl max-w-none prose-headings:font-serif prose-headings:text-ocean-800 prose-p:text-ocean-700 prose-p:leading-relaxed prose-a:text-coral-600 prose-a:no-underline hover:prose-a:text-coral-700 prose-strong:text-ocean-800 prose-blockquote:border-coral-300 prose-blockquote:bg-gradient-to-r prose-blockquote:from-sand-50 prose-blockquote:to-coral-50 prose-blockquote:not-italic">
-            {% for chunk in entry.articleBody %}
-                {% switch chunk.type %}
-                {% case "image" %}
-                    {% include "_components/blocks/image/image.twig" with {
-                        image: chunk.image.one(),
-                        caption: chunk.title,
-                        size: 'large',
-                        alignment: 'center'
-                    } only %}
+        {% include '_pageBuilders/articleBody' with {
+            articleBody: entry.articleBody,
+        } only %}
 
-                {% case "imageGallery" %}
-                    {% set galleryImages = [] %}
-                    {% for galleryBlock in chunk.imageGalleryMatrix.all() %}
-                        {% set galleryImages = galleryImages|merge([galleryBlock.image.one()]) %}
-                    {% endfor %}
-                    {% include "_components/blocks/image-gallery/image-gallery.twig" with {
-                        images: galleryImages,
-                        caption: chunk.title ?? 'Photo Gallery',
-                        columns: 3,
-                        lightbox: true
-                    } only %}
+        {% include '_components/blocks/share-bar/share-bar' with {
+            entry: entry,
+        } only %}
 
-                {% case "pullQuote" %}
-                    {% include "_components/blocks/pull-quote/pull-quote.twig" with {
-                        quote: chunk.quote,
-                        attribution: chunk.attribution,
-                        style: 'centered',
-                        size: 'large'
-                    } only %}
+        {% include '_components/blocks/related-posts/related-posts' with {
+            entry: entry,
+        } only %}
 
-                {% default %}
-                    <div class="tw-leading-4">
-                        {{ chunk }}
-                    </div>
-                {% endswitch %}
-            {% endfor %}
-        </article>
-
-        <!-- Social Sharing -->
-        <div class="flex items-center justify-center space-x-4 my-12 py-8 border-t border-b border-sand-200">
-            <span class="text-ocean-600 font-medium">Share this story:</span>
-            <div class="flex space-x-3">
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ craft.app.request.absoluteUrl }}"
-                   target="_blank"
-                   class="p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                </a>
-                <a href="https://twitter.com/intent/tweet?url={{ craft.app.request.absoluteUrl }}&text={{ entry.title|url_encode }}"
-                   target="_blank"
-                   class="p-3 bg-sky-500 text-white rounded-full hover:bg-sky-600 transition-colors">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                    </svg>
-                </a>
-                <a href="mailto:?subject={{ entry.title|url_encode }}&body=Check out this story: {{ craft.app.request.absoluteUrl }}"
-                   class="p-3 bg-gray-600 text-white rounded-full hover:bg-gray-700 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <!-- Related Posts -->
-        {% set relatedPosts = craft.entries.section('blog').id('not ' ~ entry.id).limit(3).all() %}
-        {% if relatedPosts|length %}
-            <section class="mt-16 pt-12 border-t border-sand-200">
-                <h2 class="text-3xl font-serif font-semibold text-ocean-800 text-center mb-8">
-                    More Stories from Our Journey
-                </h2>
-
-                <div class="grid md:grid-cols-3 gap-8">
-                    {% for post in relatedPosts %}
-                        <article class="group bg-gradient-to-br from-sand-50 to-coral-50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
-                            {% set postImage = post.featuredImage.one() %}
-                            {% if postImage %}
-                                <div class="aspect-video overflow-hidden">
-                                    <img src="{{ postImage.getUrl('medium') }}"
-                                         alt="{{ post.title }}"
-                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
-                                </div>
-                            {% endif %}
-
-                            <div class="p-6 space-y-3">
-                                <time datetime="{{ post.postDate|date('c') }}" class="text-sm text-ocean-600 font-medium">
-                                    {{ post.postDate|date('M j, Y') }}
-                                </time>
-
-                                <h3 class="text-lg font-serif font-semibold text-ocean-800 group-hover:text-coral-600 transition-colors line-clamp-2">
-                                    <a href="{{ post.url }}">{{ post.title }}</a>
-                                </h3>
-
-                                {% if post.summary %}
-                                    <p class="text-ocean-600 text-sm line-clamp-3">
-                                        {{ post.summary }}
-                                    </p>
-                                {% endif %}
-
-                                <a href="{{ post.url }}"
-                                   class="inline-flex items-center text-coral-600 hover:text-coral-700 font-medium text-sm group/link">
-                                    Read More
-                                    <svg class="ml-1 w-4 h-4 transform group-hover/link:translate-x-1 transition-transform"
-                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </article>
-                    {% endfor %}
-                </div>
-
-                <div class="text-center mt-8">
-                    <a href="/blog"
-                       class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-ocean-500 to-ocean-600 text-white font-medium rounded-full hover:from-ocean-600 hover:to-ocean-700 transform hover:scale-105 transition-all duration-200 shadow-lg">
-                        View All Stories
-                        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                        </svg>
-                    </a>
-                </div>
-            </section>
-        {% endif %}
     </div>
 
     <style>

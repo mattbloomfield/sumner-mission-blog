@@ -1,0 +1,25 @@
+<!-- Newsletter Signup -->
+<section class="space-y-8 bg-gradient-to-r from-sand-500 via-coral-500 to-sand-500 rounded-3xl p-8 md:p-12 text-white text-center relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+        <svg viewBox="0 0 1200 120" class="w-full h-full">
+            <path fill="currentColor" d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"></path>
+        </svg>
+    </div>
+
+    <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+        <h2 class="text-3xl md:text-4xl font-serif font-semibold">
+            {{ heading }}
+        </h2>
+        <p class="text-lg md:text-xl text-white/90 leading-relaxed">
+            {{ text }}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto pt-4">
+            <input type="email"
+                   placeholder="Your email address"
+                   class="flex-1 px-4 py-3 rounded-full text-ocean-800 placeholder-ocean-400 focus:outline-none focus:ring-4 focus:ring-white/30">
+            <button class="px-6 py-3 bg-white text-coral-600 font-semibold rounded-full hover:bg-coral-50 transform hover:scale-105 transition-all duration-200 shadow-lg">
+                Subscribe
+            </button>
+        </div>
+    </div>
+</section>

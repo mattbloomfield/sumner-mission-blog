@@ -1,0 +1,43 @@
+<!-- Call to Action Section -->
+
+{% set backgroundClasses = '' %}
+{% set btnPrimaryClasses = 'text-white bg-gradient-to-r from-ocean-500 to-ocean-600 hover:from-ocean-600 hover:to-ocean-700' %}
+{% set btnSecondaryClasses = 'text-ocean-600 border-ocean-500 hover:bg-ocean-50' %}
+{% if background is defined and background == true %}
+    {% set backgroundClasses = 'bg-gradient-to-r from-ocean-500 via-ocean-600 to-ocean-500' %}
+    {% set btnPrimaryClasses = 'bg-white text-ocean-600 hover:bg-ocean-50' %}
+    {% set btnSecondaryClasses = 'text-white border-white hover:bg-white hover:text-ocean-600' %}
+{% endif %}
+
+<section class="text-center py-16 px-8 {{ backgroundClasses }} rounded-3xl text-white relative overflow-hidden -mx-8 md:-mx-12">
+    <div class="absolute inset-0 opacity-10">
+        <svg viewBox="0 0 1200 120" class="w-full h-full">
+            <path fill="currentColor" d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"></path>
+        </svg>
+    </div>
+
+    <div class="relative z-10 max-w-4xl mx-auto space-y-6">
+        <h2 class=" font-serif font-semibold leading-tight {{ background is defined and background == true ? 'text-white text-3xl md:text-4xl lg:text-5xl' : 'text-ocean-800 text-2xl md:text-3xl' }}">
+            {% if heading is defined %}
+                {{ heading }}
+            {% endif %}
+        </h2>
+        <p class="mx-auto {{ background is defined and background == true ? 'text-ocean-100 text-xl md:text-2xl' : 'text-ocean-600 text-lg max-w-2xl' }} leading-relaxed">
+            {{ text }}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+            {% if btnPrimary is defined %}
+                <a href="{{ btnPrimary.href }}"
+                   class="inline-flex items-center px-8 py-3 {{ btnPrimaryClasses }} font-medium rounded-full transform hover:scale-105 transition-all duration-200 shadow-lg">
+                    {{ btnPrimary.text }}
+                </a>
+            {% endif %}
+            {% if btnSecondary is defined %}
+                <a href="{{ btnSecondary.href }}"
+                   class="inline-flex items-center px-8 py-3 border-2 {{ btnSecondaryClasses}} font-medium rounded-full transform hover:scale-105 transition-all duration-200">
+                    {{ btnSecondary.text }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</section>

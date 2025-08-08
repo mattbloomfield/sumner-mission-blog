@@ -32,6 +32,22 @@ settings:
         -
           - group
           - General
+    -
+      __assoc__:
+        -
+          - uid
+          - 5f445ac4-2f11-48d5-974a-166f7ba99b9a # Newsletter Signup
+        -
+          - group
+          - General
+    -
+      __assoc__:
+        -
+          - uid
+          - c384dd72-dc07-48ae-8215-67ff80858924 # Call to Action
+        -
+          - group
+          - General
   includeTableView: false
   maxEntries: null
   minEntries: null

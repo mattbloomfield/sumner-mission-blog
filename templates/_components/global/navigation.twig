@@ -1,0 +1,15 @@
+<nav class="glass-morphism sticky top-0 z-50 border-b border-sand-200">
+    <div class="container mx-auto px-6">
+        <ul class="flex justify-center space-x-8 py-4">
+            {% for item in craft.entries.section('navigation').all() %}
+                <li>
+                    <a href="{{ item.linkAll.url }}"
+                       class="px-6 py-2 rounded-full transition-all duration-300 font-medium
+                              {{ getenv('PRIMARY_SITE_URL') ~ '/' ~ craft.app.request.getPathInfo() == item.linkAll.url ? 'bg-ocean-500 text-white shadow-lg' : 'text-ocean-700 hover:bg-ocean-100' }}">
+                        {{ item.linkAll.label }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,30 @@
+fieldLayouts:
+  b853ca31-3f54-4267-9de6-c51479d95e78:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2025-08-07T23:35:35+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 3e18e51e-c692-4a4c-86b7-8cb0277cfed7 # Text
+            handle: relatedPostsTitle
+            includeInCards: false
+            instructions: null
+            label: 'Related Posts Title'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9b9126f5-8da6-4ab9-a298-ad3f484c68c0
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: f27286d6-aedd-4c32-9003-15fa11db8ef7
+        userCondition: null
+handle: recirculation
+name: Recirculation
+sortOrder: 3

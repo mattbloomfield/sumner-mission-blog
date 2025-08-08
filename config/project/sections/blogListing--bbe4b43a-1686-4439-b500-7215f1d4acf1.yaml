@@ -2,10 +2,10 @@ defaultPlacement: end
 enableVersioning: true
 entryTypes:
   -
-    uid: c66db33d-32d0-4de9-b66f-7ca99a02814f # Page
-handle: pages
+    uid: 3c4b5c76-5645-4c4d-ac7a-135c514a1be9 # Listing Page
+handle: blogListing
 maxAuthors: 1
-name: Pages
+name: 'Blog Listing'
 previewTargets:
   -
     __assoc__:
@@ -23,6 +23,6 @@ siteSettings:
   c7e96329-677b-46f3-b962-ea2f6434fb74: # Another Side of Heaven
     enabledByDefault: true
     hasUrls: true
-    template: _channels/pages/page.twig
-    uriFormat: '{slug}'
-type: channel
+    template: _singles/blog-listing.twig
+    uriFormat: blog
+type: single

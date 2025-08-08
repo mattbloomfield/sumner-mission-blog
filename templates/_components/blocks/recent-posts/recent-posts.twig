@@ -1,0 +1,69 @@
+<section class="space-y-8">
+    <div class="text-center">
+        <h2 class="text-3xl md:text-4xl font-serif font-semibold text-ocean-800 mb-4">
+            {{ title ?: "Recent Stories" }}
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-coral-400 to-sand-400 mx-auto rounded-full"></div>
+    </div>
+
+    {% if posts|length %}
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for post in posts %}
+                <article class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
+                    {% set featuredImage = post.featuredImage.one() %}
+                    {% if featuredImage %}
+                        <div class="aspect-video overflow-hidden">
+                            <img src="{{ featuredImage.getUrl('medium') }}"
+                                 alt="{{ post.title }}"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                        </div>
+                    {% endif %}
+
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between text-sm text-ocean-600">
+                            <time datetime="{{ post.postDate|date('c') }}" class="font-medium">
+                                {{ post.postDate|date('M j, Y') }}
+                            </time>
+                            {% if post.categories.all()|length %}
+                                <span class="px-3 py-1 bg-sand-100 text-sand-700 rounded-full text-xs">
+                                                        {{ post.categories.first().title }}
+                                                    </span>
+                            {% endif %}
+                        </div>
+
+                        <h3 class="text-xl font-serif font-semibold text-ocean-800 group-hover:text-coral-600 transition-colors">
+                            <a href="{{ post.url }}" class="line-clamp-2">{{ post.title }}</a>
+                        </h3>
+
+                        {% if post.summary %}
+                            <p class="text-ocean-600 line-clamp-3 leading-relaxed">
+                                {{ post.summary }}
+                            </p>
+                        {% endif %}
+
+                        <a href="{{ post.url }}"
+                           class="inline-flex items-center text-coral-600 hover:text-coral-700 font-medium group/link">
+                            Read More
+                            <svg class="ml-2 w-4 h-4 transform group-hover/link:translate-x-1 transition-transform"
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+
+        {% if link is not null %}
+            <div class="text-center">
+                <a href="{{ link.href }}"
+                   class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-ocean-500 to-ocean-600 text-white font-medium rounded-full hover:from-ocean-600 hover:to-ocean-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+                    {{ link.text }}
+                    <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        {% endif %}
+    {% endif %}
+</section>

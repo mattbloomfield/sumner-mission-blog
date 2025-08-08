@@ -26,6 +26,11 @@ settings:
         -
           - uid
           - 9deb1b78-d848-4c9a-a26e-ea8416d17c99 # Pull Quote
+    -
+      __assoc__:
+        -
+          - uid
+          - c384dd72-dc07-48ae-8215-67ff80858924 # Call to Action
   expandEntryButtons: true
   fullGraphqlData: true
   parseEmbeds: false
