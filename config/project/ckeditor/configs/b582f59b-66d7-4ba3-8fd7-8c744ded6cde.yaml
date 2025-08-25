@@ -9,6 +9,8 @@ name: Simple
 toolbar:
   - heading
   - '|'
+  - bulletedList
+  - numberedList
   - bold
   - italic
   - link

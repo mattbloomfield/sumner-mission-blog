@@ -2,31 +2,31 @@
 
     {% for chunk in articleBody %}
         {% set chunkType = chunk.type == 'entry' ? chunk.entry.type : chunk.type %}
-        {% switch chunkType %}
+	{% switch chunkType %}
         {% case "image" %}
             {% include "_components/blocks/image/image.twig" with {
-                image: chunk.image.one(),
-                caption: chunk.title,
+                image: chunk.entry.image.one(),
+                caption: chunk.entry.title,
                 size: 'large',
                 alignment: 'center'
             } only %}
 
         {% case "imageGallery" %}
             {% set galleryImages = [] %}
-            {% for galleryBlock in chunk.imageGalleryMatrix.all() %}
-                {% set galleryImages = galleryImages|merge([galleryBlock.image.one()]) %}
+            {% for galleryBlock in chunk.entry.images.all() %}
+                {% set galleryImages = galleryImages|merge([galleryBlock]) %}
             {% endfor %}
             {% include "_components/blocks/image-gallery/image-gallery.twig" with {
                 images: galleryImages,
-                caption: chunk.title ?? 'Photo Gallery',
+                caption: chunk.entry.title ?? 'Photo Gallery',
                 columns: 3,
                 lightbox: true
             } only %}
 
         {% case "pullQuote" %}
             {% include "_components/blocks/pull-quote/pull-quote.twig" with {
-                quote: chunk.quote,
-                attribution: chunk.attribution,
+                quote: chunk.entry.quote,
+                attribution: chunk.entry.attribution,
                 style: 'centered',
                 size: 'medium'
             } only %}

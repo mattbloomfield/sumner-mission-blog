@@ -1,4 +1,101 @@
-dateModified: 1754610141
+dateModified: 1756100596
+elementSources:
+  craft\elements\Asset:
+    -
+      defaultSort:
+        - dateCreated
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: 'volume:4dff0120-ffae-422b-a9e0-390f0805085d' # Images
+      tableAttributes:
+        - filename
+        - 'fieldInstance:c95237cf-76e2-4dda-831a-3bfa0737756e'
+        - size
+        - dateModified
+        - link
+      type: native
+    -
+      key: temp
+      type: native
+  craft\elements\Entry:
+    -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: '*'
+      tableAttributes:
+        - status
+        - section
+        - postDate
+        - expiryDate
+        - link
+      type: native
+    -
+      heading: Content
+      key: 'heading:2988018a-8bd8-4348-b8e5-1f8473e19383'
+      type: heading
+    -
+      key: singles
+      type: native
+    -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: 'section:cfb9f183-ae0c-4ff6-b31c-d6b7b819ff1f' # Blog
+      tableAttributes:
+        - status
+        - postDate
+        - expiryDate
+        - link
+      type: native
+    -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: 'section:0cac2d6e-2187-4f65-8a40-67b49fe43ae9' # Pages
+      tableAttributes:
+        - status
+        - postDate
+        - expiryDate
+        - link
+      type: native
+    -
+      heading: Navigation
+      key: 'heading:cada9dca-eab5-45f0-acb7-be5dbf78962c'
+      type: heading
+    -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: 'section:2f0f1e53-f4c1-4cfd-ba53-119468ce45bd' # Categories
+      tableAttributes:
+        - status
+        - postDate
+        - expiryDate
+        - link
+      type: native
+    -
+      defaultSort:
+        - structure
+        - asc
+      defaultViewMode: ''
+      disabled: false
+      key: 'section:653ca6b8-101d-4124-9d11-7212708f2417' # Navigation
+      tableAttributes:
+        - status
+        - postDate
+        - expiryDate
+        - link
+      type: native
 email:
   fromEmail: heyitsjenni@gmail.com
   fromName: 'Paradise & Purpose: Sumner Stories'
@@ -29,6 +126,7 @@ meta:
     3e35ebe5-8643-4578-8da6-ba8f027efe79: Large # Large
     4dff0120-ffae-422b-a9e0-390f0805085d: Images # Images
     5a7e61d8-fa87-440e-874d-23c9b2f6f7c6: Medium # Medium
+    5b4ad86d-b7dd-4f9f-850a-f218f641e4cd: 'Public Schema' # Public Schema
     5f445ac4-2f11-48d5-974a-166f7ba99b9a: 'Newsletter Signup' # Newsletter Signup
     6d17bbfd-6772-48ac-8ac2-8bfda31f7a71: 'Text Card' # Text Card
     7aebea11-377f-4c2b-9044-efcc61c4abcd: 'Recent Posts' # Recent Posts
