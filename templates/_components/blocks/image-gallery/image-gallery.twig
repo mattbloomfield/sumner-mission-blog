@@ -22,9 +22,10 @@
              id="{{ galleryId }}">
 
             {% for image in images %}
-                <div class="group relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
-                    <div class="aspect-square overflow-hidden relative">
+                <div class="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 cursor-pointer gallery-item" data-index="{{ loop.index0 }}">
+                    <div class="aspect-square overflow-hidden">
                         <img src="{{ image.getUrl('medium') }}"
+                             data-img-full="{{ image.getUrl() }}"
                              alt="{{ image.title ?? 'Gallery image ' ~ loop.index }}"
                              loading="lazy"
                              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -53,6 +54,48 @@
                 </div>
             {% endfor %}
         </div>
+
+        <!-- Lightbox Modal -->
+        {% if enableLightbox %}
+            <div id="{{ galleryId }}-lightbox" class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                <!-- Close button -->
+                <button class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+                        aria-label="Close lightbox">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+
+                <!-- Previous button -->
+                <button class="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors p-2 hover:bg-white/10 rounded-full"
+                        aria-label="Previous image">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+
+                <!-- Image container -->
+                <div class="max-w-4xl max-h-[80vh] flex flex-col items-center justify-center">
+                    <img id="{{ galleryId }}-lightbox-img" src="" alt="" class="max-w-[90vw] max-h-[70vh] w-auto h-auto object-contain rounded-lg" />
+
+                    <!-- Caption in lightbox -->
+                    <div id="{{ galleryId }}-lightbox-caption" class="text-white text-center mt-4 text-sm"></div>
+
+                    <!-- Image counter -->
+                    <div class="text-white text-center mt-2 text-xs opacity-75">
+                        <span id="{{ galleryId }}-current">1</span> / <span id="{{ galleryId }}-total">{{ images|length }}</span>
+                    </div>
+                </div>
+
+                <!-- Next button -->
+                <button class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors p-2 hover:bg-white/10 rounded-full"
+                        aria-label="Next image">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        {% endif %}
     {% else %}
         <div class="text-center py-16 px-8 bg-gradient-to-br from-sand-50 to-coral-50 rounded-2xl border-2 border-dashed border-sand-300">
             <div class="space-y-4">
@@ -68,10 +111,113 @@
 </div>
 
 <script>
-    // Enhanced gallery functionality
+    // Enhanced gallery functionality with lightbox
     document.addEventListener('DOMContentLoaded', function() {
-        // Add loaded class when images load for smoother transitions
-        const lazyImages = document.querySelectorAll('.gallery-item img[loading="lazy"]');
+        const galleryId = '{{ galleryId }}';
+        const galleryContainer = document.getElementById(galleryId);
+        const lightboxContainer = document.getElementById(galleryId + '-lightbox');
+        const enableLightbox = {{ enableLightbox ? 'true' : 'false' }};
+
+        if (!galleryContainer) return;
+
+        // Get all gallery items
+        const galleryItems = Array.from(galleryContainer.querySelectorAll('.gallery-item'));
+        const totalImages = galleryItems.length;
+        let currentIndex = 0;
+
+        // Lightbox elements
+        const lightboxImg = document.getElementById(galleryId + '-lightbox-img');
+        const lightboxCaption = document.getElementById(galleryId + '-lightbox-caption');
+        const currentCounter = document.getElementById(galleryId + '-current');
+        const closeBtn = lightboxContainer?.querySelector('button[aria-label="Close lightbox"]');
+        const prevBtn = lightboxContainer?.querySelector('button[aria-label="Previous image"]');
+        const nextBtn = lightboxContainer?.querySelector('button[aria-label="Next image"]');
+
+        // Image data (extract from DOM)
+        const imageData = galleryItems.map(item => {
+            const img = item.querySelector('img');
+            const captionEl = item.querySelector('p');
+
+            // Convert medium URL to large URL by replacing 'medium' with 'large'
+            let fullSrc = img.dataset.imgFull;
+            if (fullSrc.includes('medium')) {
+                fullSrc = fullSrc.replace('medium', 'large');
+            } else if (fullSrc.includes('thumbnail')) {
+                fullSrc = fullSrc.replace('thumbnail', 'large');
+            }
+
+            return {
+                src: fullSrc,
+                alt: img.alt,
+                caption: captionEl ? captionEl.textContent : ''
+            };
+        });
+
+        // Functions
+        function openLightbox(index) {
+            if (!enableLightbox || !lightboxContainer) return;
+
+            currentIndex = index;
+            updateLightbox();
+            lightboxContainer.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            if (!lightboxContainer) return;
+            lightboxContainer.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateLightbox() {
+            if (currentIndex < 0) currentIndex = totalImages - 1;
+            if (currentIndex >= totalImages) currentIndex = 0;
+
+            const image = imageData[currentIndex];
+            lightboxImg.src = image.src;
+            lightboxImg.alt = image.alt;
+            lightboxCaption.textContent = image.caption;
+            currentCounter.textContent = currentIndex + 1;
+        }
+
+        function goToPrevious() {
+            currentIndex--;
+            updateLightbox();
+        }
+
+        function goToNext() {
+            currentIndex++;
+            updateLightbox();
+        }
+
+        // Event listeners for gallery items
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => openLightbox(index));
+        });
+
+        // Event listeners for lightbox controls
+        if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+        if (prevBtn) prevBtn.addEventListener('click', goToPrevious);
+        if (nextBtn) nextBtn.addEventListener('click', goToNext);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (!lightboxContainer || lightboxContainer.classList.contains('hidden')) return;
+
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') goToPrevious();
+            if (e.key === 'ArrowRight') goToNext();
+        });
+
+        // Close lightbox when clicking on dark background
+        if (lightboxContainer) {
+            lightboxContainer.addEventListener('click', function(e) {
+                if (e.target === this) closeLightbox();
+            });
+        }
+
+        // Original lazy loading functionality
+        const lazyImages = galleryContainer.querySelectorAll('img[loading="lazy"]');
         lazyImages.forEach(img => {
             if (img.complete) {
                 img.classList.add('loaded');
@@ -83,18 +229,7 @@
             }
         });
 
-        // Keyboard navigation for gallery links
-        const galleryLinks = document.querySelectorAll('[data-lightbox] a');
-        galleryLinks.forEach(link => {
-            link.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.click();
-                }
-            });
-        });
-
-        // Add intersection observer for fade-in animation
+        // Original intersection observer for fade-in animation
         const galleryObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
@@ -110,7 +245,6 @@
         });
 
         // Observe gallery items for animation
-        const galleryItems = document.querySelectorAll('#{{ galleryId }} > div');
         galleryItems.forEach(item => {
             item.style.opacity = '0';
             item.style.transform = 'translateY(20px)';
