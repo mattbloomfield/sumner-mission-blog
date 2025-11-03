@@ -1,13 +1,3 @@
-{#
-Single Image Component - Beach Theme
-Usage: {% include '_components/blocks/image/image.twig' with {
-    image: entry.myImage.one(),
-    caption: 'Optional caption text',
-    size: 'large',
-    alignment: 'center'
-} %}
-#}
-
 {% set imageSize = size ?? 'large' %}
 {% set imageAlignment = alignment ?? 'center' %}
 {% set showCaption = caption is defined and caption is not empty %}

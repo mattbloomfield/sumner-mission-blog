@@ -4,9 +4,10 @@
         {% set chunkType = chunk.type == 'entry' ? chunk.entry.type : chunk.type %}
 	{% switch chunkType %}
         {% case "image" %}
+            {% set image = chunk.entry.image.one() %}
             {% include "_components/blocks/image/image.twig" with {
-                image: chunk.entry.image.one(),
-                caption: chunk.entry.title,
+                image: image,
+                caption: image.caption,
                 size: 'large',
                 alignment: 'center'
             } only %}
