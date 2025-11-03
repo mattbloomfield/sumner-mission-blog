@@ -14,7 +14,9 @@
                              alt="{{ heroImage.title ?? 'Mission hero image' }}"
                              class="w-full h-full object-cover"/>
                     </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                    {% if entry.hero.summary %}
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                    {% endif %}
                 {% endif %}
 
                 <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12 text-white">

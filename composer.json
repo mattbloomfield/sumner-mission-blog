@@ -2,12 +2,13 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
+    "convergine/craft-brevo": "1.0.2",
     "craftcms/ckeditor": "4.9.0",
     "craftcms/cms": "^5.0.0",
     "vlucas/phpdotenv": "^5.4.0"
   },
   "require-dev": {
-    "craftcms/generator": "^2.0.0",
+    "craftcms/generator": "^2.2",
     "yiisoft/yii2-shell": "^2.0.3"
   },
   "config": {
@@ -32,5 +33,10 @@
       "url": "https://composer.craftcms.com",
       "canonical": false
     }
-  ]
+  ],
+  "autoload": {
+    "psr-4": {
+      "modules\\site\\": "modules/site/"
+    }
+  }
 }

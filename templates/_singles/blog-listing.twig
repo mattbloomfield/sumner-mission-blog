@@ -8,12 +8,8 @@
         <header class="text-center space-y-6">
             <div class="flex items-center justify-center mb-6">
                 <div class="h-px bg-gradient-to-r from-transparent via-coral-300 to-transparent flex-1"></div>
-                <div class="mx-6">
-                    <svg class="w-8 h-8 text-coral-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                </div>
-                <div class="h-px bg-gradient-to-r from-coral-300 via-transparent to-transparent flex-1"></div>
+                <div class="bg-coral-300 w-4 h-4 rounded-full" ></div>
+                <div class="h-px bg-gradient-to-r from-transparent via-coral-300 to-transparent flex-1"></div>
             </div>
 
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-semibold text-ocean-800 leading-tight">
@@ -131,11 +127,9 @@
                         <!-- Add separator after featured post -->
                         {% if loop.first and posts|length > 1 %}
                             <div class="flex items-center justify-center my-16">
-                                <div class="h-px bg-gradient-to-r from-transparent via-sand-300 to-transparent flex-1"></div>
-                                <div class="mx-8">
-                                    <div class="w-3 h-3 bg-coral-400 rounded-full"></div>
-                                </div>
-                                <div class="h-px bg-gradient-to-r from-sand-300 via-transparent to-transparent flex-1"></div>
+                                <div class="h-px bg-gradient-to-r from-transparent via-coral-300 to-transparent flex-1"></div>
+                                <div class="bg-coral-300 w-4 h-4 rounded-full" ></div>
+                                <div class="h-px bg-gradient-to-r from-transparent via-coral-300 to-transparent flex-1"></div>
                             </div>
                         {% endif %}
                     {% endfor %}

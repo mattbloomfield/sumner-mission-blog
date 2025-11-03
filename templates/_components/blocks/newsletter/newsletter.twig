@@ -13,13 +13,45 @@
         <p class="text-lg md:text-xl text-white/90 leading-relaxed">
             {{ text }}
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto pt-4">
+        <form
+            class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto pt-4"
+            action="/actions/site/form/submit"
+            method="post"
+        >
+            {{ csrfInput() }}
             <input type="email"
                    placeholder="Your email address"
+                     name="email"
                    class="flex-1 px-4 py-3 rounded-full text-ocean-800 placeholder-ocean-400 focus:outline-none focus:ring-4 focus:ring-white/30">
             <button class="px-6 py-3 bg-white text-coral-600 font-semibold rounded-full hover:bg-coral-50 transform hover:scale-105 transition-all duration-200 shadow-lg">
                 Subscribe
             </button>
-        </div>
+        </form>
     </div>
 </section>
+
+<script>
+    // Simple form submission handler (replace with actual integration)
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        if (email) {
+            fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(new FormData(this))
+            }).then(response => {
+                if (response.ok) {
+                    alert('Thank you for subscribing!');
+                } else {
+                    alert('There was an error. Please try again.');
+                }
+            });
+            this.reset();
+        } else {
+            alert('Please enter a valid email address.');
+        }
+    });
+</script>

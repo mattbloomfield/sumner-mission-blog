@@ -4,14 +4,6 @@
 {% set showCaption = caption is defined and caption is not empty %}
 
 <div class="my-12 space-y-8">
-    {% if showCaption %}
-        <div class="text-center space-y-4">
-            <h3 class="text-2xl md:text-3xl font-serif font-semibold text-ocean-800">
-                {{ caption }}
-            </h3>
-            <div class="w-24 h-1 bg-gradient-to-r from-coral-400 to-sand-400 mx-auto rounded-full"></div>
-        </div>
-    {% endif %}
 
     {% if images %}
         <div class="grid gap-4
@@ -46,8 +38,8 @@
 
                     {% if image.caption %}
                         <div class="p-4 bg-gradient-to-r from-sand-50 to-coral-50 border-t-2 border-coral-200">
-                            <p class="text-ocean-700 font-medium text-center text-sm leading-relaxed">
-                                {{ image.caption }}
+                            <p class="text-ocean-700 font-medium text-center text-sm leading-relaxed" data-full-caption="{{ image.caption }}">
+                                {{ image.caption|truncate(50) }}
                             </p>
                         </div>
                     {% endif %}
@@ -149,7 +141,7 @@
             return {
                 src: fullSrc,
                 alt: img.alt,
-                caption: captionEl ? captionEl.textContent : ''
+                caption: captionEl ? captionEl.dataset.fullCaption : ''
             };
         });
 

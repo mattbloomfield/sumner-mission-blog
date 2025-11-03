@@ -1,0 +1,16 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 5b9bc5e7-3452-4e17-86ef-9981a3c885b2 # Subscriber
+handle: subscribers
+maxAuthors: 1
+name: Subscribers
+propagationMethod: all
+siteSettings:
+  c7e96329-677b-46f3-b962-ea2f6434fb74: # Another Side of Heaven
+    enabledByDefault: true
+    hasUrls: false
+    template: null
+    uriFormat: null
+type: channel

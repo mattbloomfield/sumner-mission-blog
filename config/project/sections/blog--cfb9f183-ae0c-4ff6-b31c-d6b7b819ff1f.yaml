@@ -21,7 +21,7 @@ previewTargets:
 propagationMethod: all
 siteSettings:
   c7e96329-677b-46f3-b962-ea2f6434fb74: # Another Side of Heaven
-    enabledByDefault: true
+    enabledByDefault: false
     hasUrls: true
     template: _channels/blog/post.twig
     uriFormat: 'blog/{slug}'

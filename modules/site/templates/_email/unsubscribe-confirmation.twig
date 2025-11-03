@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsubscribe Confirmation - Another Side of Heaven</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1ba5c8 0%, #0d8fa3 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1ba5c8 0%, #0d8fa3 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .checkmark {
+            width: 60px;
+            height: 60px;
+            background-color: #f9f7f4;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .content h2 {
+            color: #1ba5c8;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .content p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .message-box {
+            background-color: #f9f7f4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 4px solid #1ba5c8;
+        }
+
+        .message-box p {
+            margin: 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: opacity 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1ba5c8 0%, #0d8fa3 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background-color: #f9f7f4;
+            color: #1ba5c8;
+            border: 1px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0ebe5;
+        }
+
+        .footer {
+            background-color: #8b7355;
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        .footer a {
+            color: #ffc684;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>Another Side of Heaven</h1>
+        <p>Serving God in the Caribbean</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="checkmark">✓</div>
+
+        <h2>{{ message }}</h2>
+
+        {% if status == 'success' %}
+            <p>
+                We've removed your email from our mailing list. You won't receive any more newsletters from us.
+            </p>
+
+            <div class="message-box">
+                <p>
+                    We're grateful for your interest in our mission work. If you change your mind in the future, we'd be happy to have you back.
+                </p>
+            </div>
+        {% else %}
+            <p>
+                It seems there was an issue processing your request. Please try again later or contact our support team for assistance.
+            </p>
+        {% endif %}
+
+        <p style="font-size: 14px; color: #999; margin-top: 25px;">
+            Thank you for being part of our community.
+        </p>
+
+        <div class="button-group">
+            <a href="/" class="btn btn-primary">Return to Home</a>
+            <a href="/blog" class="btn btn-secondary">Visit Our Blog</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p><strong>Another Side of Heaven</strong></p>
+        <p>Serving God's people in the Caribbean</p>
+        <p style="margin-top: 15px;">
+            <a href="/">Home</a> •
+            <a href="/blog">Blog</a> •
+            <a href="/contact">Contact</a>
+        </p>
+        <p style="margin-top: 15px; opacity: 0.8;">© 2025 Another Side of Heaven</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+fieldLayouts:
+  b22dbd32-7c82-4269-9538-7363bf9637bc:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        name: Unsubscribe
+        uid: 0e1a4e0e-5d54-4491-bd18-9611ec63b559
+        userCondition: null
+      -
+        elementCondition: null
+        name: 'New Post Notification'
+        uid: e94af7bb-8f77-41d7-8bc0-9f09e5111dec
+        userCondition: null
+      -
+        elementCondition: null
+        name: Subscribe
+        uid: 720c6d0b-bbf0-4bfc-9dc7-11b37d5e4c7c
+        userCondition: null
+handle: email
+name: Email
+sortOrder: 4
