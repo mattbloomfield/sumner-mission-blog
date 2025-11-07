@@ -3,8 +3,9 @@
   "prefer-stable": true,
   "require": {
     "convergine/craft-brevo": "1.0.2",
-    "craftcms/ckeditor": "4.9.0",
+    "craftcms/ckeditor": "4.10.1",
     "craftcms/cms": "^5.0.0",
+    "vaersaagod/seomate": "3.2.0",
     "vlucas/phpdotenv": "^5.4.0"
   },
   "require-dev": {

@@ -2,6 +2,30 @@
 
 {% block title %}{{ entry.title ~ ' - ' ~ siteName }}- {% endblock %}
 
+{% block jsonld %}
+    <script type="application/ld+json">
+        { "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": "{{ entry.title }}",
+            "image": "{{ entry.featuredImage ?? '' }}",
+            "genre": "religious service",
+            "keywords": "mission, service, help, people, lds, caribbean, virgin islands, espanola, st. thomas, st. john",
+            "wordcount": "1120",
+            "publisher": "Another Side of Heaven",
+            "url": "{{ entry.getUrl() }}",
+            "datePublished": "{{ entry.postDate|date('Y-m-d') }}",
+            "dateCreated": "{{ entry.postDate|date('Y-m-d') }}",
+            "dateModified": "{{ entry.dateUpdated|date('Y-m-d') }}",
+            "description": "{{ entry.summary }}",
+            "articleBody": "{{ entry.articleBody|raw }}",
+            "author": {
+                "@type": "Person",
+                "name": "John & Kristi Sumner"
+            }
+        }
+    </script>
+{% endblock %}
+
 {% block content %}
     <div class="max-w-4xl mx-auto">
         <!-- Article Header -->
